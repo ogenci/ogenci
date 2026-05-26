@@ -831,17 +831,14 @@ export default function Home() {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-[20px] font-display font-bold leading-snug tracking-tight mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
+                      <h3 className="text-[20px] font-display font-bold leading-snug tracking-tight mb-3 text-foreground group-hover:text-primary transition-colors duration-300 line-clamp-2">
                         {title}
                       </h3>
 
                       {/* Desc */}
-                      <p className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-muted-foreground leading-relaxed line-clamp-3">
+                      <p className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-muted-foreground leading-relaxed flex-1 line-clamp-3">
                         {desc}
                       </p>
-
-                      {/* Spacer */}
-                      <div className="flex-1" />
 
                       {/* Footer row */}
                       <div className="pt-5 flex items-center justify-between border-t border-border">
