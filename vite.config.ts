@@ -8,25 +8,26 @@ const port = Number(process.env.PORT) || 3000;
 const basePath = process.env.BASE_PATH || "/";
 
 const articleDir = path.resolve(import.meta.dirname, "src/content/articles");
-let birthtimes: Record<string, number> = {};
-try {
-  birthtimes = Object.fromEntries(
-    fs.readdirSync(articleDir)
-      .filter(f => f.endsWith(".md"))
-      .map(f => [f.replace(/\.md$/, ""), fs.statSync(path.join(articleDir, f)).birthtimeMs])
-  );
-} catch {
-  // articles directory may not exist yet
+
+function readBirthtimes(): Record<string, number> {
+  try {
+    return Object.fromEntries(
+      fs.readdirSync(articleDir)
+        .filter(f => f.endsWith(".md"))
+        .map(f => [f.replace(/\.md$/, ""), fs.statSync(path.join(articleDir, f)).mtimeMs])
+    );
+  } catch {
+    return {};
+  }
 }
 
 function articleBirthtimesPlugin(): Plugin {
-  const replacement = JSON.stringify(birthtimes);
   return {
     name: "article-birthtimes",
     enforce: "pre",
     transform(code, id) {
       if (id.includes("src/lib/articles.ts")) {
-        return code.replace("/* BIRTHTIMES */{}", replacement);
+        return code.replace("/* BIRTHTIMES */{}", JSON.stringify(readBirthtimes()));
       }
     },
   };

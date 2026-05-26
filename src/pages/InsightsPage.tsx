@@ -8,6 +8,7 @@ import TagBadge from "@/components/TagBadge";
 import FilterBar from "@/components/FilterBar";
 import ArticleCard from "@/components/ArticleCard";
 import BodyText from "@/components/BodyText";
+import { Image } from "@/components/Image";
 import articles, { sortedArticleKeys, articleKeys } from "@/data/articles";
 
 export default function InsightsPage() {
@@ -39,10 +40,11 @@ export default function InsightsPage() {
         <Link href={`/insights/${featuredSlug}`}>
           <section className="mb-24 rounded-3xl border border-border relative overflow-hidden group cursor-pointer">
             <div className="relative h-[360px] md:h-[540px]">
-              <img
+              <Image
                 src={featured.image}
                 alt={featured.title}
                 className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/50 via-transparent to-transparent" />

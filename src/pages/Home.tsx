@@ -8,6 +8,7 @@ import {
 import PageLayout from "@/components/PageLayout";
 import AmbientGlow from "@/components/AmbientGlow";
 import PillBadge from "@/components/PillBadge";
+import { Image } from "@/components/Image";
 import SectionRule from "@/components/SectionRule";
 import SectionHeader from "@/components/SectionHeader";
 import SectionFooter from "@/components/SectionFooter";
@@ -236,10 +237,11 @@ export default function Home() {
                 className="relative"
               >
                 <div className="rounded-[40px] overflow-hidden aspect-square shadow-2xl border border-white/20">
-                  <img
+                  <Image
                     src="/ogenci_digital_hub_collage.png"
                     alt="Digital Hub & Growth Engine"
                     className="w-full h-full object-cover"
+                    loading="eager"
                   />
                 </div>
                 <div className="absolute top-1/2 -right-12 -translate-y-1/2 rotate-90 hidden xl:block">

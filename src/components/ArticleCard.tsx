@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Clock, ArrowRight } from "lucide-react";
 import TagBadge from "@/components/TagBadge";
 import BodyText from "@/components/BodyText";
+import { Image } from "@/components/Image";
 interface ArticleCardProps {
   tag: string;
   title: string;
@@ -34,7 +35,7 @@ export default function ArticleCard({ tag, title, desc, date, readTime, image, s
         className="border border-border rounded-xl bg-background hover:bg-card cursor-pointer group relative overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 h-full flex flex-col"
       >
         <div className="relative h-[200px] w-full overflow-hidden flex-shrink-0">
-          <img
+          <Image
             src={image}
             alt={title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"

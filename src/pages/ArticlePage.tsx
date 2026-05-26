@@ -8,6 +8,7 @@ import DarkCtaSection from "@/components/DarkCtaSection";
 import TagBadge from "@/components/TagBadge";
 import AuthorAvatar from "@/components/AuthorAvatar";
 import BodyText from "@/components/BodyText";
+import { Image } from "@/components/Image";
 import { useParallax } from "@/hooks/useParallax";
 import { fadeUp } from "@/lib/animations";
 import articles, { sortedArticleKeys } from "@/data/articles";
@@ -42,10 +43,11 @@ export default function ArticlePage() {
       {/* Hero */}
       <section className="relative h-[45vh] md:h-[55vh] overflow-hidden">
         <motion.div style={{ y }} className="absolute inset-0">
-          <img
+          <Image
             src={article.image}
             alt={article.title}
             className="w-full h-full object-cover"
+            loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/50 via-transparent to-transparent" />
@@ -183,7 +185,7 @@ export default function ArticlePage() {
                     className="group border border-border rounded-2xl bg-background overflow-hidden hover:shadow-xl transition-all duration-500"
                   >
                     <div className="relative h-[200px] overflow-hidden">
-                      <img
+                      <Image
                         src={art.image}
                         alt={art.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"

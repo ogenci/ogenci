@@ -57,12 +57,13 @@ const MONTH_INDEX: Record<string, number> = {
 const createdAt: Record<string, number> = /* BIRTHTIMES */{};
 
 export const sortedArticleKeys = Object.keys(articles).sort((a, b) => {
+  const birthDiff = (createdAt[b] || 0) - (createdAt[a] || 0);
+  if (birthDiff !== 0) return birthDiff;
   const [aMonth, aYear] = articles[a].date.split(" ");
   const [bMonth, bYear] = articles[b].date.split(" ");
   const aNum = Number(aYear) * 12 + (MONTH_INDEX[aMonth] || 0);
   const bNum = Number(bYear) * 12 + (MONTH_INDEX[bMonth] || 0);
-  if (aNum !== bNum) return bNum - aNum;
-  return (createdAt[b] || 0) - (createdAt[a] || 0);
+  return bNum - aNum;
 });
 
 export default articles;
