@@ -1,8 +1,13 @@
-import { motion, useScroll, useTransform, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link, useRoute } from "wouter";
 import { ArrowUpRight, TrendingUp, Target } from "lucide-react";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import PageLayout from "@/components/PageLayout";
+import DarkCtaSection from "@/components/DarkCtaSection";
+import PillBadge from "@/components/PillBadge";
+import DotGrid from "@/components/DotGrid";
+import BodyText from "@/components/BodyText";
+import { useParallax } from "@/hooks/useParallax";
+import { fadeUp, scaleIn } from "@/lib/animations";
 
 const caseStudies = {
   "jonmoore": {
@@ -61,188 +66,145 @@ const caseStudies = {
   }
 };
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
-};
-
 export default function WorkPage() {
   const [, params] = useRoute("/work/:slug");
   const slug = params?.slug || "jonmoore";
-  
-  // For demonstration, fallback to jonmoore if not found
+
   const data = caseStudies[slug as keyof typeof caseStudies] || caseStudies["jonmoore"];
 
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const { y, opacity } = useParallax({ yInput: 1000, yOutput: 200, opacityInput: 300, opacityMin: 0 });
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground selection:bg-primary selection:text-background">
-      <Header />
-
-      <div className="xl:px-10 w-full max-w-[1600px] mx-auto relative">
-        <main>
-          {/* Hero Section */}
-          <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a] text-white pt-24 pb-12 px-6">
-        <motion.div style={{ y: y1, opacity }} className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a0a] opacity-80 z-10" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-primary/20 blur-[150px] rounded-full mix-blend-screen" />
-        </motion.div>
-
-        <div className="relative z-20 max-w-5xl w-full mx-auto flex flex-col items-center text-center">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp} className="flex flex-col items-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 border border-white/20 rounded-full text-[10px] font-mono mb-8 uppercase tracking-widest text-white/70 backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-              Case Study · {data.client}
-            </div>
-            
-            <h1 className="text-5xl md:text-[8vw] font-display font-bold leading-[0.95] tracking-tighter mb-8 max-w-4xl">
-              {data.tagline}
-            </h1>
+    <PageLayout showGridLines={false}>
+      <main>
+        {/* Hero Section */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a] text-white pt-24 pb-12 px-6">
+          <motion.div style={{ y, opacity }} className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a0a] opacity-80 z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-primary/20 blur-[150px] rounded-full mix-blend-screen" />
           </motion.div>
-        </div>
 
-        <motion.div 
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-          className="absolute bottom-12 left-0 w-full px-6 flex justify-between items-end text-[10px] font-mono uppercase tracking-widest text-white/50 z-20 max-w-[1600px] mx-auto right-0"
-        >
-          <div className="flex flex-col gap-2">
-            <span>Industry: <strong className="text-white">{data.industry}</strong></span>
-            <span>Location: <strong className="text-white">{data.location}</strong></span>
-          </div>
-          <div className="flex flex-col gap-2 text-right">
-            <span>Services: <strong className="text-white">{data.service}</strong></span>
-            <span>Year: <strong className="text-white">{data.year}</strong></span>
-          </div>
-        </motion.div>
-      </section>
+          <div className="relative z-20 max-w-5xl w-full mx-auto flex flex-col items-center text-center">
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} className="flex flex-col items-center">
+              <PillBadge variant="light">Case Study · {data.client}</PillBadge>
 
-      {/* Main Content Area */}
-      <div className="bg-background text-foreground relative z-30">
-        
-        {/* The Challenge & Solution */}
-        <section className="px-6 py-32 border-b border-border">
-          <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8">
-            <div className="md:col-span-5 md:col-start-2">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
-                <h3 className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground mb-6 flex items-center gap-3">
-                  <Target className="w-4 h-4 text-primary" /> The Challenge
-                </h3>
-                <p className="text-2xl md:text-3xl font-display leading-[1.3] text-foreground">
-                  {data.challenge}
-                </p>
-              </motion.div>
-            </div>
-            
-            <div className="md:col-span-5 md:col-start-7">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
-                <h3 className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground mb-6 flex items-center gap-3">
-                  <ArrowUpRight className="w-4 h-4 text-primary" /> The Solution
-                </h3>
-                <p className="text-base font-mono leading-relaxed text-muted-foreground uppercase tracking-wider font-bold">
-                  {data.solution}
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Impact / Stats Grid */}
-        <section className="px-6 py-32 bg-[#f4f1ea] border-b border-border">
-          <div className="max-w-[1400px] mx-auto">
-            <div className="mb-20 text-center">
-              <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tight">Business Impact</h2>
-              <p className="mt-4 text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground font-bold">Measurable growth engineered for scale.</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border shadow-xl">
-              {data.stats.map((stat, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-background p-16 flex flex-col items-center justify-center text-center group hover:bg-card transition-colors"
-                >
-                  <TrendingUp className="w-6 h-6 text-primary mb-8 opacity-50 group-hover:opacity-100 transition-opacity" />
-                  <div className="text-6xl md:text-[84px] font-display font-bold tracking-tighter text-foreground mb-4" style={{ color: "hsl(77, 100%, 38%)" }}>
-                    {stat.value}
-                  </div>
-                  <div className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-muted-foreground">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Visual Showcase Placeholder */}
-        <section className="py-32 px-6 overflow-hidden">
-          <div className="max-w-[1600px] mx-auto">
-             <div className="flex flex-col md:flex-row gap-8">
-               <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="flex-1 aspect-[4/3] bg-muted border border-border rounded-xl overflow-hidden relative group">
-                 <div className="absolute inset-0 bg-[radial-gradient(#0a0a0a_1px,transparent_1px)] [background-size:16px_16px] opacity-10" />
-                 <div className="absolute inset-0 flex items-center justify-center">
-                   <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground font-bold">Premium Visual Asset 01</span>
-                 </div>
-               </motion.div>
-               <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex-1 aspect-[4/5] bg-foreground text-background border border-border rounded-xl overflow-hidden relative group">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                   <span className="text-[10px] font-mono uppercase tracking-widest opacity-50 font-bold">Mobile Experience Showcase</span>
-                 </div>
-               </motion.div>
-             </div>
-          </div>
-        </section>
-
-        {/* Client Feedback - space reserved for real feedback */}
-        <section className="px-6 py-32 bg-primary/5 border-y border-border">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-primary font-bold mb-12">Client Feedback</div>
+              <h1 className="text-5xl md:text-[8vw] font-display font-bold leading-[0.95] tracking-tighter mb-8 max-w-4xl">
+                {data.tagline}
+              </h1>
             </motion.div>
           </div>
-        </section>
 
-        {/* Next Project / CTA */}
-        <section className="px-6 py-40 flex flex-col items-center text-center relative overflow-hidden bg-[#0a0a0a] text-white">
-          <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
-             <div className="w-[800px] h-[800px] bg-primary rounded-full blur-[200px]" />
-          </div>
-          
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="relative z-10 max-w-3xl">
-            <h2 className="text-5xl md:text-[84px] font-display font-bold leading-none tracking-tight mb-8">
-              Ready to <em className="italic font-normal text-primary">scale?</em>
-            </h2>
-            <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/70 mb-12 font-bold leading-relaxed max-w-xl mx-auto">
-              Stop guessing. Start growing. Get a data-driven strategy custom-built for your business and the global market.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/book">
-                <div
-                  className="px-8 py-4 rounded-full font-bold uppercase tracking-[0.2em] inline-flex items-center justify-center gap-2 text-[10px] font-mono transition-transform hover:scale-105 cursor-pointer" 
-                  style={{ backgroundColor: "hsl(77, 100%, 38%)", color: "#0a0a0a" }}
-                >
-                  Let's Talk <ArrowUpRight className="w-4 h-4" />
-                </div>
-              </Link>
-              <Link href="/">
-                <button className="px-8 py-4 rounded-full font-bold uppercase tracking-[0.2em] inline-flex items-center justify-center gap-2 text-[10px] font-mono text-white border border-white/20 hover:bg-white/10 transition-colors">
-                  Back to Home
-                </button>
-              </Link>
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
+            className="absolute bottom-12 left-0 w-full px-6 flex justify-between items-end text-[10px] font-mono uppercase tracking-widest text-white/50 z-20 max-w-[1600px] mx-auto right-0"
+          >
+            <div className="flex flex-col gap-2">
+              <span>Industry: <strong className="text-white">{data.industry}</strong></span>
+              <span>Location: <strong className="text-white">{data.location}</strong></span>
+            </div>
+            <div className="flex flex-col gap-2 text-right">
+              <span>Services: <strong className="text-white">{data.service}</strong></span>
+              <span>Year: <strong className="text-white">{data.year}</strong></span>
             </div>
           </motion.div>
         </section>
 
-        </div>
-        </main>
+        {/* Main Content Area */}
+        <div className="bg-background text-foreground relative z-30">
 
-        <Footer />
-      </div>
-    </div>
+          {/* The Challenge & Solution */}
+          <section className="px-6 py-32 border-b border-border">
+            <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8">
+              <div className="md:col-span-5 md:col-start-2">
+                <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
+                  <h3 className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground mb-6 flex items-center gap-3">
+                    <Target className="w-4 h-4 text-primary" /> The Challenge
+                  </h3>
+                  <p className="text-2xl md:text-3xl font-display leading-[1.3] text-foreground">
+                    {data.challenge}
+                  </p>
+                </motion.div>
+              </div>
+
+              <div className="md:col-span-5 md:col-start-7">
+                <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
+                  <h3 className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground mb-6 flex items-center gap-3">
+                    <ArrowUpRight className="w-4 h-4 text-primary" /> The Solution
+                  </h3>
+                  <p className="text-base font-mono leading-relaxed text-muted-foreground uppercase tracking-wider font-bold">
+                    {data.solution}
+                  </p>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* Impact / Stats Grid */}
+          <section className="px-6 py-32 bg-[#f4f1ea] border-b border-border">
+            <div className="max-w-[1400px] mx-auto">
+              <div className="mb-20 text-center">
+                <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tight">Business Impact</h2>
+                <BodyText className="mt-4">Measurable growth engineered for scale.</BodyText>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border shadow-xl">
+                {data.stats.map((stat, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="bg-background p-16 flex flex-col items-center justify-center text-center group hover:bg-card transition-colors"
+                  >
+                    <TrendingUp className="w-6 h-6 text-primary mb-8 opacity-50 group-hover:opacity-100 transition-opacity" />
+                    <div className="text-6xl md:text-[84px] font-display font-bold tracking-tighter text-foreground mb-4 text-primary">
+                      {stat.value}
+                    </div>
+                    <BodyText as="div">{stat.label}</BodyText>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Visual Showcase Placeholder */}
+          <section className="py-32 px-6 overflow-hidden">
+            <div className="max-w-[1600px] mx-auto">
+              <div className="flex flex-col md:flex-row gap-8">
+                <motion.div variants={scaleIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex-1 aspect-[4/3] bg-muted border border-border rounded-xl overflow-hidden relative group">
+                  <DotGrid size={16} opacity={0.1} />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <BodyText as="span">Premium Visual Asset 01</BodyText>
+                  </div>
+                </motion.div>
+                <motion.div variants={scaleIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex-1 aspect-[4/5] bg-foreground text-background border border-border rounded-xl overflow-hidden relative group">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <BodyText className="opacity-50" as="span">Mobile Experience Showcase</BodyText>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* Client Feedback - space reserved for real feedback */}
+          <section className="px-6 py-32 bg-primary/5 border-y border-border">
+            <div className="max-w-4xl mx-auto text-center">
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+                <BodyText tracking="0.3em" className="text-primary mb-12" as="div">Client Feedback</BodyText>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Next Project / CTA */}
+          <DarkCtaSection
+            heading='Ready to <em class="italic font-normal text-primary">scale?</em>'
+            description="Stop guessing. Start growing. Get a data-driven strategy custom-built for your business and the global market."
+            primaryAction={{ label: "Let's Talk", href: "/book" }}
+            secondaryAction={{ label: "Back to Home", href: "/" }}
+          />
+        </div>
+      </main>
+    </PageLayout>
   );
 }

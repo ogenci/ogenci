@@ -56,7 +56,7 @@ function Router() {
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-8 h-8 rounded-full border-2 border-[hsl(77,100%,38%)] border-t-transparent animate-spin" />
+          <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
           <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/50">Loading OGENCI...</span>
         </div>
       </div>

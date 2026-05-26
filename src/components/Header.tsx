@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { Link, useLocation } from "wouter";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import BodyText from "@/components/BodyText";
 
 export default function Header() {
   const { scrollY } = useScroll();
@@ -101,8 +102,7 @@ export default function Header() {
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex items-center gap-2 px-6 h-10 rounded-full text-[10px] font-mono font-bold uppercase tracking-[0.2em] transition-colors cursor-pointer"
-                    style={{ backgroundColor: "hsl(77, 100%, 38%)", color: "#0a0a0a" }}
+                    className="flex items-center gap-2 px-6 h-10 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest transition-colors cursor-pointer bg-primary text-primary-foreground"
                   >
                     Let's Talk 
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -142,7 +142,7 @@ export default function Header() {
             </div>
 
             <div className="flex flex-col gap-1 flex-grow">
-              <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground mb-4">Navigation</div>
+              <BodyText tracking="0.3em" className="mb-4" as="div">Navigation</BodyText>
               {[
                 { name: "Services", id: "services", num: "03" },
                 { name: "Pricing", id: "pricing", num: "04" },
@@ -179,12 +179,11 @@ export default function Header() {
 
             <div className="mt-8 space-y-8 pb-8 border-t border-border pt-8">
               <div className="space-y-4">
-                <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground">Get Started</div>
+                <BodyText tracking="0.3em" as="div">Get Started</BodyText>
                 <Link href="/book" onClick={() => setIsMenuOpen(false)}>
                   <motion.div
                     whileTap={{ scale: 0.98 }}
-                    className="w-fit flex items-center justify-between px-8 h-11 rounded-full text-[10px] font-mono font-bold uppercase tracking-[0.2em] transition-colors cursor-pointer"
-                    style={{ backgroundColor: "hsl(77, 100%, 38%)", color: "#0a0a0a" }}
+                    className="w-fit flex items-center justify-between px-8 h-11 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest transition-colors cursor-pointer bg-primary text-primary-foreground"
                   >
                     Let's Talk
                     <ArrowUpRight className="w-4 h-4 ml-4" />
@@ -193,7 +192,7 @@ export default function Header() {
               </div>
 
               <div className="flex flex-col gap-4">
-                <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground">Socials</div>
+                <BodyText tracking="0.3em" as="div">Socials</BodyText>
                 <div className="flex gap-10 text-xs font-mono font-bold uppercase tracking-[0.2em]">
                   <a href="https://wa.me/233263460173" target="_blank" rel="noreferrer" className="hover:text-primary">WhatsApp</a>
                   <a href="#" className="hover:text-primary">LinkedIn</a>

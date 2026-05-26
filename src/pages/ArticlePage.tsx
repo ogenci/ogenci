@@ -1,16 +1,16 @@
-import { motion, useScroll, useTransform, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link, useRoute } from "wouter";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Calendar, Clock } from "lucide-react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import PageLayout from "@/components/PageLayout";
+import DarkCtaSection from "@/components/DarkCtaSection";
+import TagBadge from "@/components/TagBadge";
+import AuthorAvatar from "@/components/AuthorAvatar";
+import BodyText from "@/components/BodyText";
+import { useParallax } from "@/hooks/useParallax";
+import { fadeUp } from "@/lib/animations";
 import articles, { articleKeys } from "@/data/articles";
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-};
 
 export default function ArticlePage() {
   const [, params] = useRoute("/insights/:slug");
@@ -19,22 +19,18 @@ export default function ArticlePage() {
   const article = articles[slug];
   if (!article) {
     return (
-      <div className="relative min-h-screen bg-background text-foreground selection:bg-primary selection:text-background">
-        <Header />
+      <PageLayout>
         <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 px-6 pt-32">
           <h1 className="text-4xl font-display font-bold">Article not found</h1>
           <Link href="/insights" className="text-[10px] font-mono uppercase tracking-widest text-primary hover:underline">
             Back to Insights
           </Link>
         </div>
-        <Footer />
-      </div>
+      </PageLayout>
     );
   }
 
-  const { scrollY } = useScroll();
-  const heroParallax = useTransform(scrollY, [0, 500], [0, 150]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.3]);
+  const { y, opacity } = useParallax({ yInput: 500, yOutput: 150, opacityInput: 300, opacityMin: 0.3 });
 
   const otherArticles = articleKeys
     .filter(k => k !== slug)
@@ -42,17 +38,10 @@ export default function ArticlePage() {
     .map(k => ({ slug: k, ...articles[k] }));
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground selection:bg-primary selection:text-background">
-      <Header />
-
-      <div className="xl:px-10 w-full max-w-[1600px] mx-auto relative">
-        {/* Decorative Grid Lines */}
-        <div className="absolute inset-y-0 left-6 xl:left-10 w-px bg-border/20 pointer-events-none" />
-        <div className="absolute inset-y-0 right-6 xl:right-10 w-px bg-border/20 pointer-events-none" />
-
-        {/* Hero */}
-        <section className="relative h-[45vh] md:h-[55vh] overflow-hidden">
-        <motion.div style={{ y: heroParallax }} className="absolute inset-0">
+    <PageLayout>
+      {/* Hero */}
+      <section className="relative h-[45vh] md:h-[55vh] overflow-hidden">
+        <motion.div style={{ y }} className="absolute inset-0">
           <img
             src={article.image}
             alt={article.title}
@@ -63,7 +52,7 @@ export default function ArticlePage() {
         </motion.div>
 
         <motion.div
-          style={{ opacity: heroOpacity }}
+          style={{ opacity }}
           className="absolute inset-0 flex items-end pb-8 md:pb-12 px-6"
         >
           <div className="max-w-[1600px] mx-auto w-full">
@@ -74,11 +63,7 @@ export default function ArticlePage() {
               className="max-w-4xl mx-auto text-center"
             >
               <div className="flex items-center justify-center gap-4 mb-6">
-                <span
-                  className="text-[9px] font-mono font-bold uppercase tracking-[0.25em] px-3 py-1.5 rounded-full border border-primary text-primary"
-                >
-                  {article.tag}
-                </span>
+                <TagBadge variant="primary">{article.tag}</TagBadge>
                 <span className="text-[9px] font-mono text-primary/70 flex items-center gap-1.5">
                   <Clock className="w-3 h-3" />
                   {article.readTime}
@@ -100,7 +85,6 @@ export default function ArticlePage() {
             </motion.div>
           </div>
         </motion.div>
-
       </section>
 
       {/* Article body */}
@@ -143,30 +127,26 @@ export default function ArticlePage() {
 
             {/* Article footer */}
             <div className="mt-20 pt-10 border-t border-border">
-              <div className="flex items-center gap-4 mb-2">
-                <div className="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center font-display text-lg font-bold">
-                  O
-                </div>
-                <div>
-                  <div className="text-sm font-display font-bold">OGENCI Growth Lab</div>
-                  <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground mt-0.5">Research & Insights Team</div>
-                </div>
-              </div>
-              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground mt-6 leading-relaxed max-w-xl">
+              <AuthorAvatar
+                initial="O"
+                name="OGENCI Growth Lab"
+                role="Research & Insights Team"
+                className="mb-2"
+              />
+              <BodyText className="mt-6 max-w-xl">
                 Deep, mathematical research on building high-conversion interfaces, attribution logic, and autonomous operational frameworks that pay predictable business dividends.
-              </p>
+              </BodyText>
             </div>
 
             {/* CTA card */}
             <div className="mt-12 p-8 md:p-10 rounded-2xl bg-[#f4f1ea] border border-border">
               <h3 className="text-xl md:text-2xl font-display font-bold mb-3">Ready to apply these insights?</h3>
-              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground font-bold leading-relaxed mb-6">
+              <BodyText className="mb-6">
                 Let&rsquo;s analyze your growth parameters and build a strategy that delivers measurable pipeline value.
-              </p>
+              </BodyText>
               <Link href="/book">
                 <span
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[10px] font-mono font-bold uppercase tracking-[0.2em] cursor-pointer hover:opacity-90 transition-opacity"
-                  style={{ backgroundColor: "hsl(77, 100%, 38%)", color: "#0a0a0a" }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest cursor-pointer hover:opacity-90 transition-opacity bg-primary text-primary-foreground"
                 >
                   Book a Strategy Session
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -212,9 +192,7 @@ export default function ArticlePage() {
                     </div>
                     <div className="p-7">
                       <div className="flex items-center gap-3 mb-4">
-                        <span className="text-[9px] font-mono font-bold uppercase tracking-[0.25em] px-2.5 py-1 rounded-full border border-border/40 text-muted-foreground">
-                          {art.tag}
-                        </span>
+                        <TagBadge>{art.tag}</TagBadge>
                         <span className="text-[9px] font-mono text-muted-foreground">{art.readTime}</span>
                       </div>
                       <h3 className="text-lg font-display font-bold leading-snug tracking-tight text-foreground group-hover:text-primary transition-colors line-clamp-2">
@@ -222,7 +200,7 @@ export default function ArticlePage() {
                       </h3>
                       <div className="flex items-center justify-between mt-6 pt-4 border-t border-border">
                         <span className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground">{art.date}</span>
-                        <span className="text-[9px] font-mono font-bold uppercase tracking-[0.2em] text-primary inline-flex items-center gap-1.5">
+                        <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-primary inline-flex items-center gap-1.5">
                           Read <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                         </span>
                       </div>
@@ -236,44 +214,12 @@ export default function ArticlePage() {
       )}
 
       {/* Bottom CTA */}
-      <section className="px-6 py-32 flex flex-col items-center text-center relative overflow-hidden bg-[#0a0a0a] text-white -mx-6 xl:-mx-10">
-        <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
-          <div className="w-[800px] h-[800px] bg-primary rounded-full blur-[200px]" />
-        </div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="relative z-10 max-w-3xl"
-        >
-          <h2 className="text-5xl md:text-[84px] font-display font-bold leading-none tracking-tight mb-8">
-            Ready to <em className="italic font-normal text-primary">scale?</em>
-          </h2>
-          <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/70 mb-12 font-bold leading-relaxed max-w-xl mx-auto">
-            Stop guessing. Start growing. Get a data-driven strategy custom-built for your business and the global market.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/book">
-              <div
-                className="px-8 py-4 rounded-full font-bold uppercase tracking-[0.2em] inline-flex items-center justify-center gap-2 text-[10px] font-mono transition-transform hover:scale-105 cursor-pointer"
-                style={{ backgroundColor: "hsl(77, 100%, 38%)", color: "#0a0a0a" }}
-              >
-                Let&rsquo;s Talk <ArrowUpRight className="w-4 h-4" />
-              </div>
-            </Link>
-            <Link href="/insights">
-              <span className="px-8 py-4 rounded-full font-bold uppercase tracking-[0.2em] inline-flex items-center justify-center gap-2 text-[10px] font-mono text-white border border-white/20 hover:bg-white/10 transition-colors cursor-pointer">
-                More Insights
-              </span>
-            </Link>
-          </div>
-        </motion.div>
-      </section>
-
-        <Footer />
-      </div>
-    </div>
+      <DarkCtaSection
+        heading='Ready to <em class="italic font-normal text-primary">scale?</em>'
+        description="Stop guessing. Start growing. Get a data-driven strategy custom-built for your business and the global market."
+        primaryAction={{ label: "Let's Talk", href: "/book" }}
+        secondaryAction={{ label: "More Insights", href: "/insights" }}
+      />
+    </PageLayout>
   );
 }

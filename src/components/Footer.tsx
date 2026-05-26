@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { ArrowUpRight } from "lucide-react";
+import BodyText from "@/components/BodyText";
 
 export default function Footer() {
   return (
@@ -9,13 +10,12 @@ export default function Footer() {
           <Link href="/" className="text-2xl font-display font-bold tracking-tight mb-4 block">
             OGENCI<span className="text-primary">.</span>
           </Link>
-          <p className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-[#0a0a0a]/70 leading-relaxed mb-6 max-w-xs">
+          <BodyText tracking="0.2em" className="mb-6 max-w-xs text-[#0a0a0a]/70" as="p">
             A premier global digital agency rooted in Africa. We build high-converting digital ecosystems, run ROI-driven ad campaigns, and deploy AI systems that scale businesses worldwide.
-          </p>
+          </BodyText>
           <Link 
             href="/book"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-[0.2em] font-bold hover:opacity-90 transition-opacity shadow-sm cursor-pointer"
-            style={{ backgroundColor: "hsl(77, 100%, 38%)", color: "#0a0a0a" }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-mono uppercase tracking-widest font-bold hover:opacity-90 transition-opacity shadow-sm cursor-pointer bg-primary text-primary-foreground"
           >
             Let's Talk <ArrowUpRight className="w-4 h-4" />
           </Link>
@@ -77,10 +77,10 @@ export default function Footer() {
         <div className="flex justify-between items-baseline w-full select-none" style={{ fontSize: "clamp(6rem, 20vw, 28rem)", lineHeight: 0.75 }}>
           <span className="font-display font-black text-[#0a0a0a]">O</span>
           <span className="font-display font-black text-[#0a0a0a]">G</span>
-          <span className="font-serif italic font-medium" style={{ color: "hsl(77, 100%, 38%)" }}>E</span>
-          <span className="font-serif italic font-medium" style={{ color: "hsl(77, 100%, 38%)" }}>N</span>
-          <span className="font-serif italic font-medium" style={{ color: "hsl(77, 100%, 38%)" }}>C</span>
-          <span className="font-serif italic font-medium" style={{ color: "hsl(77, 100%, 38%)" }}>I</span>
+          <span className="font-serif italic font-medium text-primary">E</span>
+          <span className="font-serif italic font-medium text-primary">N</span>
+          <span className="font-serif italic font-medium text-primary">C</span>
+          <span className="font-serif italic font-medium text-primary">I</span>
           <span className="font-display font-black text-[#0a0a0a]">.</span>
         </div>
       </div>
