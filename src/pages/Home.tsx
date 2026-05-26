@@ -575,7 +575,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 mb-16">
             <ProjectCard
               tag="Supply Chain Solutions · 03 / 05"
               meta="2025 · LOGISTICS · GHANA"
