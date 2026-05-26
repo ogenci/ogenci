@@ -1,41 +1,33 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, ArrowUpRight, BarChart3, Clock } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, Clock } from "lucide-react";
+import { useState, useMemo } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import articles, { articleKeys } from "@/data/articles";
 
+const MONTH_ORDER: Record<string, number> = {
+  January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
+  July: 7, August: 8, September: 9, October: 10, November: 11, December: 12,
+};
+
 export default function InsightsPage() {
   const [activeFilter, setActiveFilter] = useState("All");
 
-  // Sliders for ROI Calculator
-  const [adSpend, setAdSpend] = useState(5000);
-  const [currentConv, setCurrentConv] = useState(1.2);
-  const [automationRate, setAutomationRate] = useState(50);
+  const sortedKeys = useMemo(() =>
+    [...articleKeys].sort((a, b) => {
+      const [aMonth, aYear] = articles[a].date.split(" ");
+      const [bMonth, bYear] = articles[b].date.split(" ");
+      if (aYear !== bYear) return Number(bYear) - Number(aYear);
+      return (MONTH_ORDER[bMonth] || 0) - (MONTH_ORDER[aMonth] || 0);
+    }),
+    []
+  );
 
-  // ROI Calculator Calculations
-  // Assume:
-  // - Average conversion lift with OGENCI is +150% (factor of 2.5)
-  // - Average customer order value (AOV) is $150
-  // - CPC is $1.00 (Clicks = Ad Spend)
-  const clicks = adSpend;
-  const originalConversions = clicks * (currentConv / 100);
-  const projectedConv = currentConv * 2.5; // conversion lift
-  const projectedConversions = clicks * (projectedConv / 100);
-  const conversionLift = projectedConversions - originalConversions;
-  const revenueLift = conversionLift * 150; // $150 average B2B lead or checkout value
-  
-  // Assume:
-  // - Average support ticket count per month is 1200
-  // - Each support ticket takes human lead average 8 minutes to resolve
-  // - Total hours saved = (1200 tickets * 8 minutes * automationRate%) / 60
-  const hoursReclaimed = Math.round((1200 * 8 * (automationRate / 100)) / 60);
-  
-  // ROAS calculation
-  const roas = parseFloat((2.4 * (projectedConv / currentConv)).toFixed(1));
+  const featuredSlug = sortedKeys[0];
+  const featured = articles[featuredSlug];
 
-  const filteredArticleKeys = articleKeys.filter((key) => {
+  const filteredArticleKeys = sortedKeys.filter((key) => {
     if (activeFilter === "All") return true;
     return articles[key].tag === activeFilter;
   });
@@ -68,135 +60,50 @@ export default function InsightsPage() {
             </p>
           </header>
 
-          {/* Calculator Section - premium high impact interactive feature */}
-          <section className="mb-24 p-8 md:p-12 rounded-3xl bg-[#f4f1ea] border border-border relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-6 opacity-5">
-              <BarChart3 className="w-48 h-48" />
-            </div>
-
-            <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                  <BarChart3 className="w-4.5 h-4.5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-display font-bold">Interactive Growth & Scale Calculator</h3>
-                  <p className="text-[8px] font-mono uppercase tracking-widest text-muted-foreground mt-0.5">Model your pipeline lift with high-performance OGENCI optimization</p>
+          {/* Featured Article - Latest */}
+          <Link href={`/insights/${featuredSlug}`}>
+            <section className="mb-24 rounded-3xl border border-border relative overflow-hidden group cursor-pointer">
+              <div className="relative h-[360px] md:h-[540px]">
+                <img
+                  src={featured.image}
+                  alt={featured.title}
+                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/50 via-transparent to-transparent" />
+              </div>
+              <div className="absolute inset-0 flex items-end p-8 md:p-12">
+                <div className="max-w-3xl">
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-[0.25em] px-3 py-1.5 rounded-full border border-white/30 text-white/90">
+                      {featured.tag}
+                    </span>
+                    <span className="text-[9px] font-mono text-white/60 flex items-center gap-1.5">
+                      <Clock className="w-3 h-3" />
+                      {featured.readTime}
+                    </span>
+                  </div>
+                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold leading-[1.08] tracking-tight text-white mb-4">
+                    {featured.title}
+                  </h3>
+                  <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/70 font-bold leading-relaxed line-clamp-2 mb-6 max-w-2xl">
+                    {featured.desc}
+                  </p>
+                  <div className="flex items-center gap-5 text-[10px] font-mono uppercase tracking-widest text-white/50">
+                    <span>{featured.date}</span>
+                    <span className="w-px h-4 bg-white/20" />
+                    <span className="inline-flex items-center gap-1.5 text-primary group-hover:gap-2 transition-all">
+                      Read Article <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
                 </div>
               </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-10">
-                {/* Sliders column */}
-                <div className="lg:col-span-7 space-y-8">
-                  {/* Slider 1 */}
-                  <div>
-                    <div className="flex justify-between items-baseline mb-2">
-                      <label className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground font-bold">Estimated Monthly Ad Spend</label>
-                      <span className="text-lg font-display font-bold text-foreground">${adSpend.toLocaleString()}</span>
-                    </div>
-                    <input
-                      type="range"
-                      min="500"
-                      max="50000"
-                      step="500"
-                      value={adSpend}
-                      onChange={(e) => setAdSpend(parseInt(e.target.value))}
-                      className="w-full h-1 bg-border rounded-lg appearance-none cursor-pointer accent-primary"
-                    />
-                    <div className="flex justify-between text-[8px] font-mono text-muted-foreground mt-1">
-                      <span>$500</span>
-                      <span>$25,000</span>
-                      <span>$50,000</span>
-                    </div>
-                  </div>
-
-                  {/* Slider 2 */}
-                  <div>
-                    <div className="flex justify-between items-baseline mb-2">
-                      <label className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground font-bold">Current Conversion Rate</label>
-                      <span className="text-lg font-display font-bold text-foreground">{currentConv}%</span>
-                    </div>
-                    <input
-                      type="range"
-                      min="0.2"
-                      max="5.0"
-                      step="0.1"
-                      value={currentConv}
-                      onChange={(e) => setCurrentConv(parseFloat(e.target.value))}
-                      className="w-full h-1 bg-border rounded-lg appearance-none cursor-pointer accent-primary"
-                    />
-                    <div className="flex justify-between text-[8px] font-mono text-muted-foreground mt-1">
-                      <span>0.2%</span>
-                      <span>2.6%</span>
-                      <span>5.0%</span>
-                    </div>
-                  </div>
-
-                  {/* Slider 3 */}
-                  <div>
-                    <div className="flex justify-between items-baseline mb-2">
-                      <label className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground font-bold">Target AI Support Automation</label>
-                      <span className="text-lg font-display font-bold text-foreground">{automationRate}%</span>
-                    </div>
-                    <input
-                      type="range"
-                      min="10"
-                      max="90"
-                      step="5"
-                      value={automationRate}
-                      onChange={(e) => setAutomationRate(parseInt(e.target.value))}
-                      className="w-full h-1 bg-border rounded-lg appearance-none cursor-pointer accent-primary"
-                    />
-                    <div className="flex justify-between text-[8px] font-mono text-muted-foreground mt-1">
-                      <span>10%</span>
-                      <span>50%</span>
-                      <span>90%</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Metrics / Output column */}
-                <div className="lg:col-span-5 bg-background border border-border p-8 rounded-2xl flex flex-col justify-between shadow-sm">
-                  <div className="space-y-6">
-                    <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground border-b border-border pb-3">Projected Business Dividend</div>
-                    
-                    <div>
-                      <div className="text-3xl md:text-4xl font-display font-bold text-primary tracking-tight">
-                        +${Math.round(revenueLift).toLocaleString()}
-                      </div>
-                      <div className="text-[8px] font-mono uppercase tracking-widest text-muted-foreground mt-1 font-bold">Projected Monthly Revenue Lift</div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border/50">
-                      <div>
-                        <div className="text-2xl font-display font-bold text-foreground">
-                          {hoursReclaimed} hrs
-                        </div>
-                        <div className="text-[7px] font-mono uppercase tracking-widest text-muted-foreground mt-0.5 leading-none">Support Saved / Mo</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-display font-bold text-foreground">
-                          {roas}x
-                        </div>
-                        <div className="text-[7px] font-mono uppercase tracking-widest text-muted-foreground mt-0.5 leading-none">Target Campaign ROAS</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <Link href="/book">
-                    <button className="w-full py-3.5 mt-8 bg-foreground text-background hover:bg-foreground/90 rounded-full text-[9px] font-mono font-bold uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2">
-                      Discuss This Strategy
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </section>
+            </section>
+          </Link>
 
           {/* Filtering bar */}
           <div className="flex flex-wrap gap-3 mb-16 border-b border-border pb-8">
-            {["All", "Web Design", "Paid Ads", "AI Integration"].map((filter) => (
+            {["All", "Web Design", "Paid Ads", "AI Integration", "Tech Regulation"].map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}

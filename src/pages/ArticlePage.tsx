@@ -1,6 +1,8 @@
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { Link, useRoute } from "wouter";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Calendar, Clock } from "lucide-react";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import articles, { articleKeys } from "@/data/articles";
@@ -69,25 +71,25 @@ export default function ArticlePage() {
               initial="hidden"
               animate="visible"
               variants={fadeUp}
-              className="max-w-4xl"
+              className="max-w-4xl mx-auto text-center"
             >
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center justify-center gap-4 mb-6">
                 <span
-                  className="text-[9px] font-mono font-bold uppercase tracking-[0.25em] px-3 py-1.5 rounded-full border border-white/30 text-white/90"
+                  className="text-[9px] font-mono font-bold uppercase tracking-[0.25em] px-3 py-1.5 rounded-full border border-primary text-primary"
                 >
                   {article.tag}
                 </span>
-                <span className="text-[9px] font-mono text-white/60 flex items-center gap-1.5">
+                <span className="text-[9px] font-mono text-primary/70 flex items-center gap-1.5">
                   <Clock className="w-3 h-3" />
                   {article.readTime}
                 </span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[84px] font-display font-bold leading-[1.02] tracking-tight text-white mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.08] tracking-tight text-white mb-6">
                 {article.title}
               </h1>
 
-              <div className="flex items-center gap-5 text-[10px] font-mono uppercase tracking-widest text-white/50">
+              <div className="flex items-center justify-center gap-5 text-[10px] font-mono uppercase tracking-widest text-primary/60">
                 <span className="flex items-center gap-2">
                   <Calendar className="w-3.5 h-3.5" />
                   {article.date}
@@ -135,8 +137,8 @@ export default function ArticlePage() {
             variants={fadeUp}
             className="lg:col-span-7 lg:col-start-4 max-w-3xl"
           >
-            <div className="text-base md:text-lg leading-loose space-y-8 [&_p]:text-muted-foreground [&_p]:leading-[1.9] [&_h3]:text-foreground [&_h3]:text-2xl [&_h3]:font-display [&_h3]:font-bold [&_h3]:mt-16 [&_h3]:mb-6 [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-6 [&_blockquote]:py-4 [&_blockquote]:my-10 [&_blockquote]:italic [&_blockquote]:text-foreground [&_blockquote]:bg-primary/5 [&_blockquote]:rounded-r [&_blockquote]:text-lg [&_blockquote]:leading-relaxed">
-              {article.content}
+            <div className="text-base md:text-lg leading-loose space-y-8 [&_p]:text-muted-foreground [&_p]:leading-[1.9] [&_p:first-of-type]:text-lg [&_p:first-of-type]:text-foreground [&_p:first-of-type]:font-semibold [&_h3]:text-foreground [&_h3]:text-2xl [&_h3]:font-display [&_h3]:font-bold [&_h3]:mt-16 [&_h3]:mb-6 [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-6 [&_blockquote]:py-4 [&_blockquote]:my-10 [&_blockquote]:italic [&_blockquote]:text-foreground [&_blockquote]:bg-primary/5 [&_blockquote]:rounded-r [&_blockquote]:text-lg [&_blockquote]:leading-relaxed">
+              <Markdown remarkPlugins={[remarkGfm]}>{article.content}</Markdown>
             </div>
 
             {/* Article footer */}

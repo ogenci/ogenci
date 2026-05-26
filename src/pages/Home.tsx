@@ -205,7 +205,7 @@ export default function Home() {
               </h1>
 
               <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground leading-relaxed mb-12 max-w-2xl font-bold">
-                Beautiful websites and expensive ads don't scale businesses—revenue does. OGENCI builds the high-converting digital infrastructure that turns your traffic into predictable, data-backed profit globally.
+                Beautiful websites and expensive ads don't scale businesses-revenue does. OGENCI builds the high-converting digital infrastructure that turns your traffic into predictable, data-backed profit globally.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -789,7 +789,7 @@ export default function Home() {
                   readTime: "5 min read",
                   num: "01",
                   accent: "hsl(77, 100%, 38%)",
-                  image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&h=400&fit=crop&q=80&auto=format",
+                  image: "/images/articles/african-tech.jpg",
                   slug: "african-tech-leap"
                 },
                 {
@@ -800,7 +800,7 @@ export default function Home() {
                   readTime: "8 min read",
                   num: "02",
                   accent: "#60a5fa",
-                  image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop&q=80&auto=format",
+                  image: "/images/articles/attribution-metrics.jpg",
                   slug: "attribution-metrics-2026"
                 },
                 {
@@ -811,7 +811,7 @@ export default function Home() {
                   readTime: "6 min read",
                   num: "03",
                   accent: "#c084fc",
-                  image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=400&fit=crop&q=80&auto=format",
+                  image: "/images/articles/autonomous-ai.jpg",
                   slug: "autonomous-ai-agents"
                 }
               ].map(({ tag, title, desc, date, readTime, num, accent, image, slug }) => (

@@ -9,7 +9,7 @@ export default function SideRails() {
       </div>
       <div className="fixed top-0 right-0 h-screen w-10 hidden xl:flex flex-col items-center justify-center pointer-events-none z-40 bg-background">
         <p className="text-[9px] tracking-[0.22em] uppercase font-mono text-muted-foreground rotate-180 whitespace-nowrap" style={{ writingMode: "vertical-rl" }}>
-          OGENCI — Digital Agency · Ghana · Pan-African
+          OGENCI - Digital Agency · Ghana · Pan-African
         </p>
       </div>
     </>

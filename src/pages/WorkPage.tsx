@@ -198,7 +198,7 @@ export default function WorkPage() {
           </div>
         </section>
 
-        {/* Client Feedback — space reserved for real feedback */}
+        {/* Client Feedback - space reserved for real feedback */}
         <section className="px-6 py-32 bg-primary/5 border-y border-border">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
