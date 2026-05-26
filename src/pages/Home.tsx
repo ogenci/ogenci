@@ -631,40 +631,14 @@ export default function Home() {
                     title: "Jonmoore",
                     desc: "Premium conceptual redesign for West Africa's leading heavy logistics provider. Optimized for high-ticket B2B quote conversions.",
                     bg: "#f3f4f6", text: "#0a0a0a",
+                    externalUrl: undefined as string | undefined,
                   },
                   {
                     tag: "Enterprise Redesign · 02 / 05", meta: "2025 · EDUCATION · GHANA",
                     title: "ISA Ghana",
                     desc: "Premium digital transformation for the International School of Accra. Streamlined admissions funnel and immersive visual storytelling.",
                     bg: "hsl(77, 100%, 38%)", text: "#0a0a0a",
-                  },
-                  {
-                    tag: "Supply Chain Solutions · 03 / 05", meta: "2025 · LOGISTICS · GHANA",
-                    title: "BJH Logistics",
-                    desc: "Full-scale digital platform for a premium logistics firm. Integrated tracking, custom portal, and optimized booking flows.",
-                    bg: "#0a0a0a", text: "#ffffff",
-                    externalUrl: "https://bjh-logistics.vercel.app/"
-                  },
-                  {
-                    tag: "Educational Branding · 04 / 05", meta: "2025 · EDUCATION · GHANA",
-                    title: "Accra Grammar",
-                    desc: "Complete digital identity and enrollment platform for one of Ghana's leading schools. Modern, accessible, and high-converting.",
-                    bg: "#ffffff", text: "#0a0a0a",
-                    externalUrl: "https://accra-grammar-school.vercel.app/"
-                  },
-                  {
-                    tag: "K-12 Digital Platform · 05 / 05", meta: "2024 · EDUCATION · GHANA",
-                    title: "Rich Jane School",
-                    desc: "An immersive, community-focused website for a premier preschool and primary institution. Optimized for parent engagement.",
-                    bg: "hsl(77, 100%, 38%)", text: "#0a0a0a",
-                    externalUrl: "https://rich-jane-school.vercel.app/"
-                  },
-                  {
-                    tag: "Digital Transformation · 2025", meta: "NON-PROFIT · GLOBAL",
-                    title: "Wesleyan CM",
-                    desc: "A unified global digital sanctuary for a multi-national ministry. High-bandwidth streaming and global donation systems.",
-                    bg: "#0a0a0a", text: "#ffffff",
-                    externalUrl: "https://wesleyancm.org/"
+                    externalUrl: undefined as string | undefined,
                   },
                 ].map(({ tag, meta, title, desc, bg, text, externalUrl }) => (
                   externalUrl ? (
@@ -706,19 +680,221 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="mt-16 flex justify-end gap-2">
-              <button className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-card transition-colors">
-                <ArrowRight className="w-4 h-4 rotate-180" />
-              </button>
-              <button className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-card transition-colors">
-                <ArrowRight className="w-4 h-4" />
-              </button>
+            {/* Second Row of Cards spanning 100% of section width */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+              {[
+                {
+                  tag: "Supply Chain Solutions · 03 / 05", meta: "2025 · LOGISTICS · GHANA",
+                  title: "BJH Logistics",
+                  desc: "Full-scale digital platform for a premium logistics firm. Integrated tracking, custom portal, and optimized booking flows.",
+                  bg: "#0a0a0a", text: "#ffffff",
+                  externalUrl: "https://bjh-logistics.vercel.app/"
+                },
+                {
+                  tag: "Educational Branding · 04 / 05", meta: "2025 · EDUCATION · GHANA",
+                  title: "Accra Grammar",
+                  desc: "Complete digital identity and enrollment platform for one of Ghana's leading schools. Modern, accessible, and high-converting.",
+                  bg: "#ffffff", text: "#0a0a0a",
+                  externalUrl: "https://accra-grammar-school.vercel.app/"
+                },
+                {
+                  tag: "Digital Transformation · 2025", meta: "NON-PROFIT · GLOBAL",
+                  title: "Wesleyan CM",
+                  desc: "A unified global digital sanctuary for a multi-national ministry. High-bandwidth streaming and global donation systems.",
+                  bg: "#0a0a0a", text: "#ffffff",
+                  externalUrl: "https://wesleyancm.org/"
+                },
+              ].map(({ tag, meta, title, desc, bg, text, externalUrl }) => (
+                externalUrl ? (
+                  <a key={title} href={externalUrl} target="_blank" rel="noopener noreferrer" className="group cursor-pointer" data-cursor="view">
+                    <div className="relative aspect-[4/5] overflow-hidden mb-6 rounded-xl border border-[hsl(var(--border))]" style={{ backgroundColor: bg, color: text }}>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                        <div className="text-[10px] font-mono uppercase tracking-widest opacity-50 mb-4">{tag}</div>
+                        <div className="text-4xl font-display font-bold italic">{title}</div>
+                        <p className="mt-6 text-[10px] font-mono uppercase tracking-[0.2em] font-bold opacity-70 max-w-xs leading-relaxed">{desc}</p>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-baseline mb-4 text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+                      <div>{tag}</div>
+                      <div>{meta}</div>
+                    </div>
+                    <h3 className="text-2xl font-display font-bold mb-3">{title}</h3>
+                    <p className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-muted-foreground leading-relaxed max-w-sm">{desc}</p>
+                  </a>
+                ) : (
+                  <Link key={title} href={`/work/${title.toLowerCase().replace(/ /g, '-')}`}>
+                    <div className="group cursor-pointer" data-cursor="view">
+                      <div className="relative aspect-[4/5] overflow-hidden mb-6 rounded-xl border border-[hsl(var(--border))]" style={{ backgroundColor: bg, color: text }}>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                          <div className="text-[10px] font-mono uppercase tracking-widest opacity-50 mb-4">{tag}</div>
+                          <div className="text-4xl font-display font-bold italic">{title}</div>
+                          <p className="mt-6 text-[10px] font-mono uppercase tracking-[0.2em] font-bold opacity-70 max-w-xs leading-relaxed">{desc}</p>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-baseline mb-4 text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+                        <div>{tag}</div>
+                        <div>{meta}</div>
+                      </div>
+                      <h3 className="text-2xl font-display font-bold mb-3">{title}</h3>
+                      <p className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-muted-foreground leading-relaxed max-w-sm">{desc}</p>
+                    </div>
+                  </Link>
+                )
+              ))}
+            </div>
+
+            <div className="mt-16 flex flex-col sm:flex-row justify-between items-center gap-6 border-t border-border pt-12">
+              <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+                OGENCI · Portfolio Showcase · Accra, Ghana
+              </div>
+              <Link href="/work">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-8 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] font-mono inline-flex items-center gap-3 bg-primary text-background cursor-pointer"
+                >
+                  View All Case Studies
+                  <ArrowRight className="w-4 h-4" />
+                </motion.div>
+              </Link>
+            </div>
+          </section>
+
+          {/* SEC 7.5: Insights */}
+          <section id="insights" className="px-6 pt-24 pb-32 border-t border-border">
+            <SectionRule num="VII." title="Latest Insights · Web Design · Paid Ads · AI" page="007/009" />
+
+            <div className="mt-20 mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
+              <motion.h2 
+                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+                className="text-5xl md:text-[68px] font-display font-bold leading-[1.05] tracking-tight"
+              >
+                Deep research on <em className="italic font-normal">performance</em>, scaling, and <em className="italic font-normal">revenue</em>.
+              </motion.h2>
+              <div className="flex gap-6 max-w-sm">
+                <span className="text-2xl font-light mt-[-4px]" style={{ color: "hsl(77, 100%, 38%)" }}>+</span>
+                <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground leading-relaxed font-bold">
+                  Our growth lab publishes deep analyses on modern web architectures, advertising attribution, and high-agency AI operations.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+              {[
+                {
+                  tag: "Web Design",
+                  title: "The African Tech Leap: Capturing Global Enterprise B2B Flows",
+                  desc: "Why clean, localized, high-speed UX is outperforming bloated Western digital ecosystems in high-ticket lead generation.",
+                  date: "May 2026",
+                  readTime: "5 min read",
+                  num: "01",
+                  accent: "hsl(77, 100%, 38%)",
+                  image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&h=400&fit=crop&q=80&auto=format",
+                  slug: "african-tech-leap"
+                },
+                {
+                  tag: "Paid Ads",
+                  title: "Attribution in 2026: Moving Past Google & Meta Vanity Metrics",
+                  desc: "A surgical guide to building first-party server-side tracking funnels that report pure pipeline profit, not platform estimations.",
+                  date: "April 2026",
+                  readTime: "8 min read",
+                  num: "02",
+                  accent: "#60a5fa",
+                  image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop&q=80&auto=format",
+                  slug: "attribution-metrics-2026"
+                },
+                {
+                  tag: "AI Integration",
+                  title: "Autonomous AI Agents: Operating At Zero Idle Support Latency",
+                  desc: "How we deploy fine-tuned AI systems to handle 70%+ of customer operations while maintaining human-level empathy and response precision.",
+                  date: "March 2026",
+                  readTime: "6 min read",
+                  num: "03",
+                  accent: "#c084fc",
+                  image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=400&fit=crop&q=80&auto=format",
+                  slug: "autonomous-ai-agents"
+                }
+              ].map(({ tag, title, desc, date, readTime, num, accent, image, slug }) => (
+                <Link key={slug} href={`/insights?article=${slug}`}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -4 }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    className="relative flex flex-col rounded-2xl border border-border bg-background overflow-hidden cursor-pointer group shadow-sm hover:shadow-xl transition-shadow duration-500"
+                  >
+                    {/* Cover image */}
+                    <div className="relative h-[200px] w-full overflow-hidden flex-shrink-0">
+                      <img
+                        src={image}
+                        alt={title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                      />
+                      {/* Subtle gradient overlay at bottom for readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                    </div>
+
+                    {/* Big number watermark */}
+                    <div className="absolute top-3 right-4 text-[72px] font-display font-black leading-none select-none pointer-events-none opacity-[0.06] group-hover:opacity-[0.10] transition-opacity text-foreground">
+                      {num}
+                    </div>
+
+                    <div className="flex flex-col flex-1 p-7">
+                      {/* Tag pill + read time */}
+                      <div className="flex items-center justify-between mb-5">
+                        <span className="inline-flex items-center gap-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.25em] px-3 py-1.5 rounded-full border border-border/40 text-muted-foreground">
+                          {tag}
+                        </span>
+                        <span className="text-[9px] font-mono text-muted-foreground">{readTime}</span>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-[20px] font-display font-bold leading-snug tracking-tight mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
+                        {title}
+                      </h3>
+
+                      {/* Desc */}
+                      <p className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-muted-foreground leading-relaxed flex-1 line-clamp-3">
+                        {desc}
+                      </p>
+
+                      {/* Footer row */}
+                      <div className="mt-6 pt-5 flex items-center justify-between border-t border-border">
+                        <span className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground">{date}</span>
+                        <span
+                          className="inline-flex items-center gap-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full border border-border group-hover:border-primary group-hover:text-primary transition-all duration-300"
+                        >
+                          Read Article
+                          <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-6 border-t border-border pt-12">
+              <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+                OGENCI · Thought Leadership · African Growth
+              </div>
+              <Link href="/insights">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-8 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] font-mono inline-flex items-center gap-3 bg-foreground text-background cursor-pointer"
+                >
+                  View All Insights
+                  <ArrowRight className="w-4 h-4" />
+                </motion.div>
+              </Link>
             </div>
           </section>
 
           {/* SEC 8: Testimonials */}
           <section className="px-6 pt-24 pb-12">
-            <SectionRule num="VII." title="Client Stories · Global Partnerships · ROI Driven" page="007/008" />
+            <SectionRule num="VIII." title="Client Stories · Global Partnerships · ROI Driven" page="008/009" />
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mt-20">
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="lg:col-span-7">
@@ -803,7 +979,7 @@ export default function Home() {
 
           {/* SEC 9: CTA */}
           <section id="contact" className="px-6 pt-8 pb-32">
-            <SectionRule num="VIII." title="Contact · Start Your Project · Ghana and Africa" page="008/008" />
+            <SectionRule num="IX." title="Contact · Start Your Project · Ghana and Africa" page="009/009" />
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mt-20">
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="lg:col-span-7">
