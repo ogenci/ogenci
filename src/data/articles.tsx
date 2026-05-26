@@ -1,4 +1,4 @@
-import articles, { articleKeys } from "@/lib/articles";
+import articles, { articleKeys, sortedArticleKeys } from "@/lib/articles";
 export type { Article } from "@/lib/articles";
-export { articleKeys };
+export { articleKeys, sortedArticleKeys };
 export default articles;

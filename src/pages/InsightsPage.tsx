@@ -8,30 +8,15 @@ import TagBadge from "@/components/TagBadge";
 import FilterBar from "@/components/FilterBar";
 import ArticleCard from "@/components/ArticleCard";
 import BodyText from "@/components/BodyText";
-import articles, { articleKeys } from "@/data/articles";
-
-const MONTH_ORDER: Record<string, number> = {
-  January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
-  July: 7, August: 8, September: 9, October: 10, November: 11, December: 12,
-};
+import articles, { sortedArticleKeys, articleKeys } from "@/data/articles";
 
 export default function InsightsPage() {
   const [activeFilter, setActiveFilter] = useState("All");
 
-  const sortedKeys = useMemo(() =>
-    [...articleKeys].sort((a, b) => {
-      const [aMonth, aYear] = articles[a].date.split(" ");
-      const [bMonth, bYear] = articles[b].date.split(" ");
-      if (aYear !== bYear) return Number(bYear) - Number(aYear);
-      return (MONTH_ORDER[bMonth] || 0) - (MONTH_ORDER[aMonth] || 0);
-    }),
-    []
-  );
-
-  const featuredSlug = sortedKeys[0];
+  const featuredSlug = sortedArticleKeys[0];
   const featured = articles[featuredSlug];
 
-  const filteredArticleKeys = sortedKeys.filter((key) => {
+  const filteredArticleKeys = sortedArticleKeys.filter((key) => {
     if (activeFilter === "All") return true;
     return articles[key].tag === activeFilter;
   });

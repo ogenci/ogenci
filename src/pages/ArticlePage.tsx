@@ -10,11 +10,11 @@ import AuthorAvatar from "@/components/AuthorAvatar";
 import BodyText from "@/components/BodyText";
 import { useParallax } from "@/hooks/useParallax";
 import { fadeUp } from "@/lib/animations";
-import articles, { articleKeys } from "@/data/articles";
+import articles, { sortedArticleKeys } from "@/data/articles";
 
 export default function ArticlePage() {
   const [, params] = useRoute("/insights/:slug");
-  const slug = params?.slug || articleKeys[0];
+  const slug = params?.slug || sortedArticleKeys[0];
 
   const article = articles[slug];
   if (!article) {
@@ -32,7 +32,7 @@ export default function ArticlePage() {
 
   const { y, opacity } = useParallax({ yInput: 500, yOutput: 150, opacityInput: 300, opacityMin: 0.3 });
 
-  const otherArticles = articleKeys
+  const otherArticles = sortedArticleKeys
     .filter(k => k !== slug)
     .slice(0, 2)
     .map(k => ({ slug: k, ...articles[k] }));

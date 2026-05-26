@@ -18,7 +18,7 @@ import { PrimaryButton, SecondaryButton } from "@/components/PrimaryButton";
 import ArticleCard from "@/components/ArticleCard";
 import ProjectCard from "@/components/ProjectCard";
 import { fadeUp, fadeInRight, scaleIn } from "@/lib/animations";
-import articles, { articleKeys } from "@/data/articles";
+import articles, { sortedArticleKeys } from "@/data/articles";
 
 const testimonials = [
   {
@@ -398,11 +398,10 @@ export default function Home() {
                     <div className="w-full cursor-not-allowed">
                       <button
                         disabled
-                        className={`w-full py-4 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest cursor-not-allowed ${
-                          plan.popular
+                        className={`w-full py-4 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest cursor-not-allowed ${plan.popular
                             ? 'bg-background/10 text-background/50'
                             : 'bg-foreground/10 text-foreground/50'
-                        }`}
+                          }`}
                       >
                         Booked out for the month
                       </button>
@@ -623,33 +622,21 @@ export default function Home() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-            {(() => {
-              const MONTH_ORDER: Record<string, number> = {
-                January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
-                July: 7, August: 8, September: 9, October: 10, November: 11, December: 12,
-              };
-              const sorted = [...articleKeys].sort((a, b) => {
-                const [aMonth, aYear] = articles[a].date.split(" ");
-                const [bMonth, bYear] = articles[b].date.split(" ");
-                if (aYear !== bYear) return Number(bYear) - Number(aYear);
-                return (MONTH_ORDER[bMonth] || 0) - (MONTH_ORDER[aMonth] || 0);
-              });
-              return sorted.slice(0, 3).map((slug) => {
-                const art = articles[slug];
-                return { ...art, slug };
-              });
-            })().map(({ tag, title, desc, date, readTime, image, slug }) => (
-              <ArticleCard
-                key={slug}
-                tag={tag}
-                title={title}
-                desc={desc}
-                date={date}
-                readTime={readTime}
-                image={image}
-                slug={slug}
-              />
-            ))}
+            {sortedArticleKeys.slice(0, 3).map((slug) => {
+              const { tag, title, desc, date, readTime, image } = articles[slug];
+              return (
+                <ArticleCard
+                  key={slug}
+                  tag={tag}
+                  title={title}
+                  desc={desc}
+                  date={date}
+                  readTime={readTime}
+                  image={image}
+                  slug={slug}
+                />
+              );
+            })}
           </div>
 
           <SectionFooter

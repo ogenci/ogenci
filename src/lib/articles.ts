@@ -49,5 +49,21 @@ for (const [filepath, raw] of Object.entries(modules)) {
   };
 }
 
+const MONTH_INDEX: Record<string, number> = {
+  January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
+  July: 7, August: 8, September: 9, October: 10, November: 11, December: 12,
+};
+
+const createdAt: Record<string, number> = /* BIRTHTIMES */{};
+
+export const sortedArticleKeys = Object.keys(articles).sort((a, b) => {
+  const [aMonth, aYear] = articles[a].date.split(" ");
+  const [bMonth, bYear] = articles[b].date.split(" ");
+  const aNum = Number(aYear) * 12 + (MONTH_INDEX[aMonth] || 0);
+  const bNum = Number(bYear) * 12 + (MONTH_INDEX[bMonth] || 0);
+  if (aNum !== bNum) return bNum - aNum;
+  return (createdAt[b] || 0) - (createdAt[a] || 0);
+});
+
 export default articles;
 export const articleKeys = Object.keys(articles);
