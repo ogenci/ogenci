@@ -103,7 +103,7 @@ export default function InsightsPage() {
 
           {/* Filtering bar */}
           <div className="flex flex-wrap gap-3 mb-16 border-b border-border pb-8">
-            {["All", "Web Design", "Paid Ads", "AI Integration", "Tech Regulation"].map((filter) => (
+            {["All", ...new Set(articleKeys.map(k => articles[k].tag))].map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
