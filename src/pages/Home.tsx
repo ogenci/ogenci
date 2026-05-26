@@ -2,7 +2,7 @@ import { motion, AnimatePresence, useScroll, useTransform, Variants } from "fram
 import { useState } from "react";
 import { Link } from "wouter";
 import {
-  Globe, Megaphone, Bot, BarChart2,
+  Globe, Megaphone, Bot, BarChart2, Clock,
   ArrowRight, ArrowUpRight, CheckCircle2
 } from "lucide-react";
 import Footer from "@/components/Footer";
@@ -792,11 +792,11 @@ export default function Home() {
                   if (aYear !== bYear) return Number(bYear) - Number(aYear);
                   return (MONTH_ORDER[bMonth] || 0) - (MONTH_ORDER[aMonth] || 0);
                 });
-                return sorted.slice(0, 3).map((slug, i) => {
+                return sorted.slice(0, 3).map((slug) => {
                   const art = articles[slug];
-                  return { ...art, num: String(i + 1).padStart(2, "0"), slug };
+                  return { ...art, slug };
                 });
-              })().map(({ tag, title, desc, date, readTime, num, image, slug }) => (
+              })().map(({ tag, title, desc, date, readTime, image, slug }) => (
                 <Link key={slug} href={`/insights/${slug}`}>
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -804,7 +804,7 @@ export default function Home() {
                     viewport={{ once: true }}
                     whileHover={{ y: -4 }}
                     transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                    className="relative flex flex-col rounded-2xl border border-border bg-background overflow-hidden cursor-pointer group shadow-sm hover:shadow-xl transition-shadow duration-500 h-full"
+                    className="border border-border rounded-xl bg-background hover:bg-card cursor-pointer group relative overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 h-full flex flex-col"
                   >
                     {/* Cover image */}
                     <div className="relative h-[200px] w-full overflow-hidden flex-shrink-0">
@@ -816,41 +816,36 @@ export default function Home() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                     </div>
 
-                    {/* Big number watermark */}
-                    <div className="absolute top-3 right-4 text-[72px] font-display font-black leading-none select-none pointer-events-none opacity-[0.06] group-hover:opacity-[0.10] transition-opacity text-foreground">
-                      {num}
-                    </div>
-
-                    <div className="flex flex-col flex-1 justify-between p-7">
+                    <div className="flex flex-col flex-1 justify-between p-8">
                       {/* Top group: tag, title, desc */}
                       <div>
                         {/* Tag pill + read time */}
-                        <div className="flex items-center justify-between mb-5">
-                          <span className="inline-flex items-center gap-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.25em] px-3 py-1.5 rounded-full border border-border/40 text-muted-foreground">
+                        <div className="flex justify-between items-start mb-6">
+                          <span className="text-[9px] font-mono font-bold uppercase tracking-[0.2em] px-2.5 py-1 rounded-full border border-border text-muted-foreground">
                             {tag}
                           </span>
-                          <span className="text-[9px] font-mono text-muted-foreground">{readTime}</span>
+                          <span className="text-[10px] font-mono text-muted-foreground flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {readTime}
+                          </span>
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-[20px] font-display font-bold leading-snug tracking-tight mb-3 text-foreground group-hover:text-primary transition-colors duration-300 line-clamp-2">
+                        <h3 className="text-2xl font-display font-bold mb-4 text-foreground group-hover:text-primary transition-colors line-clamp-3">
                           {title}
                         </h3>
 
                         {/* Desc */}
-                        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-muted-foreground leading-relaxed line-clamp-3">
+                        <p className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-muted-foreground leading-relaxed line-clamp-3">
                           {desc}
                         </p>
                       </div>
 
                       {/* Footer row */}
-                      <div className="pt-5 flex items-center justify-between border-t border-border">
-                        <span className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground">{date}</span>
-                        <span
-                          className="inline-flex items-center gap-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full border border-border group-hover:border-primary group-hover:text-primary transition-all duration-300"
-                        >
-                          Read Article
-                          <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                      <div className="flex justify-between items-center text-[9px] font-mono uppercase tracking-widest text-muted-foreground border-t border-border pt-4 mt-6">
+                        <span>{date}</span>
+                        <span className="flex items-center gap-1 group-hover:text-primary transition-colors">
+                          Read Article <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                         </span>
                       </div>
                     </div>
