@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import articles, { articleKeys } from "@/data/articles";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -780,41 +781,22 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-              {[
-                {
-                  tag: "Web Design",
-                  title: "The African Tech Leap: Capturing Global Enterprise B2B Flows",
-                  desc: "Why clean, localized, high-speed UX is outperforming bloated Western digital ecosystems in high-ticket lead generation.",
-                  date: "May 2026",
-                  readTime: "5 min read",
-                  num: "01",
-                  accent: "hsl(77, 100%, 38%)",
-                  image: "/images/articles/african-tech.jpg",
-                  slug: "african-tech-leap"
-                },
-                {
-                  tag: "Paid Ads",
-                  title: "Attribution in 2026: Moving Past Google & Meta Vanity Metrics",
-                  desc: "A surgical guide to building first-party server-side tracking funnels that report pure pipeline profit, not platform estimations.",
-                  date: "April 2026",
-                  readTime: "8 min read",
-                  num: "02",
-                  accent: "#60a5fa",
-                  image: "/images/articles/attribution-metrics.jpg",
-                  slug: "attribution-metrics-2026"
-                },
-                {
-                  tag: "AI Integration",
-                  title: "Autonomous AI Agents: Operating At Zero Idle Support Latency",
-                  desc: "How we deploy fine-tuned AI systems to handle 70%+ of customer operations while maintaining human-level empathy and response precision.",
-                  date: "March 2026",
-                  readTime: "6 min read",
-                  num: "03",
-                  accent: "#c084fc",
-                  image: "/images/articles/autonomous-ai.jpg",
-                  slug: "autonomous-ai-agents"
-                }
-              ].map(({ tag, title, desc, date, readTime, num, accent, image, slug }) => (
+              {(() => {
+                const MONTH_ORDER: Record<string, number> = {
+                  January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
+                  July: 7, August: 8, September: 9, October: 10, November: 11, December: 12,
+                };
+                const sorted = [...articleKeys].sort((a, b) => {
+                  const [aMonth, aYear] = articles[a].date.split(" ");
+                  const [bMonth, bYear] = articles[b].date.split(" ");
+                  if (aYear !== bYear) return Number(bYear) - Number(aYear);
+                  return (MONTH_ORDER[bMonth] || 0) - (MONTH_ORDER[aMonth] || 0);
+                });
+                return sorted.slice(0, 3).map((slug, i) => {
+                  const art = articles[slug];
+                  return { ...art, num: String(i + 1).padStart(2, "0"), slug };
+                });
+              })().map(({ tag, title, desc, date, readTime, num, image, slug }) => (
                 <Link key={slug} href={`/insights/${slug}`}>
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
