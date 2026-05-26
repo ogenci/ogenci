@@ -199,7 +199,7 @@ export default function Home() {
         <section id="why" className="px-6 pt-16 pb-32 bg-[#f4f1ea] border-y border-border/50">
           <div className="max-w-[1400px] mx-auto">
             <SectionRule num="II." title="Why OGENCI · Performance Marketing · Global Scale" page="002/008" />
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mt-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mt-12">
               <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -299,7 +299,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="bg-background p-10 flex flex-col justify-between group hover:bg-muted/30 transition-colors cursor-default"
+                  className="bg-background p-6 md:p-10 flex flex-col justify-between group hover:bg-muted/30 transition-colors cursor-default"
                 >
                   <div>
                     <div className="flex justify-between items-start mb-12">
@@ -328,7 +328,7 @@ export default function Home() {
           <div className="max-w-[1400px] mx-auto">
             <SectionRule num="IV." title="Pricing · Investment Packages · Growth Pipelines" page="004/008" />
 
-            <div className="mt-20 mb-24 flex flex-col md:flex-row justify-between items-end gap-12">
+            <div className="mt-20 mb-24 flex flex-col md:flex-row justify-between items-end gap-6 md:gap-12">
               <motion.h2
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -367,7 +367,7 @@ export default function Home() {
                   <motion.div
                     key={plan.name}
                     data-cursor="plan"
-                    className={`relative p-10 flex flex-col justify-between border-2 transition-all duration-500 ${plan.popular ? 'bg-foreground text-background border-primary shadow-2xl scale-105 z-10' : 'bg-background text-foreground border-border hover:border-primary'}`}
+                    className={`relative p-6 md:p-10 flex flex-col justify-between border-2 transition-all duration-500 ${plan.popular ? 'bg-foreground text-background border-primary shadow-2xl scale-105 z-10' : 'bg-background text-foreground border-border hover:border-primary'}`}
                   >
                     {plan.popular && (
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 text-[9px] font-mono font-bold uppercase tracking-widest bg-primary text-background rounded-full">
@@ -378,8 +378,8 @@ export default function Home() {
                       <div className="mb-8">
                         <h3 className="text-xl font-display font-bold uppercase tracking-widest mb-2">{plan.name}</h3>
                         <div className="flex items-baseline gap-1">
-                          <span className="text-[24px] font-display font-light">$</span>
-                          <span className="text-[64px] font-display font-bold tracking-tight">{plan.price}</span>
+                          <span className="text-[20px] md:text-[24px] font-display font-light">$</span>
+                          <span className="text-[48px] md:text-[64px] font-display font-bold tracking-tight">{plan.price}</span>
                           {plan.isMonthly && (
                             <span className="text-xs font-mono uppercase tracking-widest opacity-60">/mo</span>
                           )}
@@ -540,7 +540,7 @@ export default function Home() {
         <section id="work" className="dark bg-background text-foreground px-6 py-24">
           <SectionRule num="VI." title="Featured Work · Web Design · Ads · AI · 2024 / 2025" page="006/008" />
 
-          <div className="mt-20 grid grid-cols-1 lg:grid-cols-4 gap-12">
+            <div className="mt-20 grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="lg:col-span-1">
               <BodyText className="mb-8" as="div">Selected work</BodyText>
               <h2 className="text-5xl md:text-[68px] font-display font-bold leading-[1.05] tracking-tight mb-8">
@@ -652,7 +652,7 @@ export default function Home() {
         <section className="px-6 pt-24 pb-12">
           <SectionRule num="VIII." title="Client Stories · Global Partnerships · ROI Driven" page="008/009" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mt-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mt-20">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="lg:col-span-7">
               <BodyText className="mb-12" as="div">
                 Client stories · No. 06
@@ -733,7 +733,7 @@ export default function Home() {
         <section id="contact" className="px-6 pt-8 pb-32">
           <SectionRule num="IX." title="Contact · Start Your Project · Ghana and Africa" page="009/009" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mt-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mt-20">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="lg:col-span-7">
               <BodyText className="mb-8" as="div">
                 Start a conversation · No. 07

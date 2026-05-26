@@ -34,7 +34,7 @@ export default function ArticleCard({ tag, title, desc, date, readTime, image, s
         {...motionProps}
         className="border border-border rounded-xl bg-background hover:bg-card cursor-pointer group relative overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 h-full flex flex-col"
       >
-        <div className="relative h-[200px] w-full overflow-hidden flex-shrink-0">
+        <div className="relative aspect-[16/9] w-full overflow-hidden flex-shrink-0">
           <Image
             src={image}
             alt={title}

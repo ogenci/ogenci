@@ -72,7 +72,7 @@ export default function CustomCursor() {
     };
   }, [cursorX, cursorY, isVisible]);
 
-  if (!isVisible) return null;
+  if (isTouch || !isVisible) return null;
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[9999] mix-blend-difference">

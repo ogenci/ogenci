@@ -96,7 +96,7 @@ export default function WorkPage() {
 
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-            className="absolute bottom-12 left-0 w-full px-6 flex justify-between items-end text-[10px] font-mono uppercase tracking-widest text-white/50 z-20 max-w-[1600px] mx-auto right-0"
+            className="absolute bottom-12 left-0 w-full px-6 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 text-[10px] font-mono uppercase tracking-widest text-white/50 z-20 max-w-[1600px] mx-auto right-0"
           >
             <div className="flex flex-col gap-2">
               <span>Industry: <strong className="text-white">{data.industry}</strong></span>
@@ -113,7 +113,7 @@ export default function WorkPage() {
         <div className="bg-background text-foreground relative z-30">
 
           {/* The Challenge & Solution */}
-          <section className="px-6 py-32 border-b border-border">
+          <section className="px-6 py-20 md:py-32 border-b border-border">
             <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8">
               <div className="md:col-span-5 md:col-start-2">
                 <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
@@ -140,7 +140,7 @@ export default function WorkPage() {
           </section>
 
           {/* Impact / Stats Grid */}
-          <section className="px-6 py-32 bg-[#f4f1ea] border-b border-border">
+          <section className="px-6 py-20 md:py-32 bg-[#f4f1ea] border-b border-border">
             <div className="max-w-[1400px] mx-auto">
               <div className="mb-20 text-center">
                 <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tight">Business Impact</h2>
@@ -169,7 +169,7 @@ export default function WorkPage() {
           </section>
 
           {/* Visual Showcase Placeholder */}
-          <section className="py-32 px-6 overflow-hidden">
+          <section className="py-20 md:py-32 px-6 overflow-hidden">
             <div className="max-w-[1600px] mx-auto">
               <div className="flex flex-col md:flex-row gap-8">
                 <motion.div variants={scaleIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex-1 aspect-[4/3] bg-muted border border-border rounded-xl overflow-hidden relative group">
@@ -188,7 +188,7 @@ export default function WorkPage() {
           </section>
 
           {/* Client Feedback - space reserved for real feedback */}
-          <section className="px-6 py-32 bg-primary/5 border-y border-border">
+          <section className="px-6 py-20 md:py-32 bg-primary/5 border-y border-border">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
                 <BodyText tracking="0.3em" className="text-primary mb-12" as="div">Client Feedback</BodyText>

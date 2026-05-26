@@ -130,7 +130,7 @@ export default function WorkOverviewPage() {
                     <h2 className="text-4xl sm:text-5xl font-display font-bold italic mb-6 leading-none">
                       {p.title}
                     </h2>
-                    <p className="text-[10px] font-mono uppercase tracking-widest font-bold opacity-75 max-w-xs leading-relaxed">
+                    <p className="text-[10px] font-mono uppercase tracking-widest font-bold opacity-75 leading-relaxed">
                       {p.desc}
                     </p>
                   </div>

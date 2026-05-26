@@ -39,7 +39,7 @@ export default function InsightsPage() {
         {/* Featured Article - Latest */}
         <Link href={`/insights/${featuredSlug}`}>
           <section className="mb-24 rounded-3xl border border-border relative overflow-hidden group cursor-pointer">
-            <div className="relative h-[360px] md:h-[540px]">
+            <div className="relative aspect-video md:aspect-[21/9]">
               <Image
                 src={featured.image}
                 alt={featured.title}

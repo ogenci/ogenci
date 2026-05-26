@@ -22,13 +22,13 @@ export default function BookingPage() {
             variants={scaleIn}
             initial="hidden"
             animate="visible"
-            className="max-w-5xl mx-auto border border-border rounded-3xl overflow-hidden bg-card min-h-[700px] shadow-2xl relative"
+            className="max-w-5xl mx-auto border border-border rounded-3xl overflow-hidden bg-card min-h-[500px] md:min-h-[700px] shadow-2xl relative"
           >
             <DotGrid size={16} opacity={0.02} />
             <Cal
               namespace="lets-talk"
               calLink="ogenci/lets-talk"
-              style={{ width: "100%", height: "100%", minHeight: "700px" }}
+              style={{ width: "100%", height: "100%", minHeight: "500px" }}
               config={{ layout: "month_view" }}
             />
           </motion.div>

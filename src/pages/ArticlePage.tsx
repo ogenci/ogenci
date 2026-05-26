@@ -184,7 +184,7 @@ export default function ArticlePage() {
                     transition={{ delay: i * 0.1, duration: 0.5 }}
                     className="group border border-border rounded-2xl bg-background overflow-hidden hover:shadow-xl transition-all duration-500"
                   >
-                    <div className="relative h-[200px] overflow-hidden">
+                    <div className="relative aspect-[16/9] overflow-hidden">
                       <Image
                         src={art.image}
                         alt={art.title}

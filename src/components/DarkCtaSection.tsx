@@ -19,9 +19,9 @@ interface DarkCtaSectionProps {
 
 export default function DarkCtaSection({ heading, description, primaryAction, secondaryAction }: DarkCtaSectionProps) {
   return (
-    <section className="px-6 py-40 flex flex-col items-center text-center relative overflow-hidden bg-[#0a0a0a] text-white">
+    <section className="px-6 py-24 md:py-40 flex flex-col items-center text-center relative overflow-hidden bg-[#0a0a0a] text-white">
       <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
-        <div className="w-[800px] h-[800px] bg-primary rounded-full blur-[200px]" />
+        <div className="w-[min(90vw,800px)] h-[min(90vw,800px)] bg-primary rounded-full blur-[200px]" />
       </div>
 
       <motion.div
