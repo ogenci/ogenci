@@ -804,7 +804,7 @@ export default function Home() {
                     viewport={{ once: true }}
                     whileHover={{ y: -4 }}
                     transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                    className="relative flex flex-col rounded-2xl border border-border bg-background overflow-hidden cursor-pointer group shadow-sm hover:shadow-xl transition-shadow duration-500"
+                    className="relative flex flex-col rounded-2xl border border-border bg-background overflow-hidden cursor-pointer group shadow-sm hover:shadow-xl transition-shadow duration-500 h-full"
                   >
                     {/* Cover image */}
                     <div className="relative h-[200px] w-full overflow-hidden flex-shrink-0">
@@ -813,7 +813,6 @@ export default function Home() {
                         alt={title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                       />
-                      {/* Subtle gradient overlay at bottom for readability */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                     </div>
 
@@ -837,12 +836,15 @@ export default function Home() {
                       </h3>
 
                       {/* Desc */}
-                      <p className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-muted-foreground leading-relaxed flex-1 line-clamp-3">
+                      <p className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-muted-foreground leading-relaxed line-clamp-3">
                         {desc}
                       </p>
 
+                      {/* Spacer */}
+                      <div className="flex-1" />
+
                       {/* Footer row */}
-                      <div className="mt-6 pt-5 flex items-center justify-between border-t border-border">
+                      <div className="pt-5 flex items-center justify-between border-t border-border">
                         <span className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground">{date}</span>
                         <span
                           className="inline-flex items-center gap-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full border border-border group-hover:border-primary group-hover:text-primary transition-all duration-300"
