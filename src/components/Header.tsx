@@ -85,8 +85,11 @@ export default function Header() {
                 <Link href="/#process" onClick={(e) => handleNavClick("process", e)} className="px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-1">
                   Process <span className="text-[8px] opacity-50 mb-1">05</span>
                 </Link>
-                <Link href="/#work" onClick={(e) => handleNavClick("work", e)} className="px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-1">
+                <Link href="/work" className="px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-1">
                   Work <span className="text-[8px] opacity-50 mb-1">06</span>
+                </Link>
+                <Link href="/insights" className="px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-1">
+                  Insights <span className="text-[8px] opacity-50 mb-1">07</span>
                 </Link>
                 <Link href="/#contact" onClick={(e) => handleNavClick("contact", e)} className="px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all">
                   Contact <span className="text-[8px] opacity-50 mb-1">08</span>
@@ -144,18 +147,34 @@ export default function Header() {
                 { name: "Services", id: "services", num: "03" },
                 { name: "Pricing", id: "pricing", num: "04" },
                 { name: "Process", id: "process", num: "05" },
-                { name: "Work", id: "work", num: "06" },
+                { name: "Work", id: "work", num: "06", isPage: true, href: "/work" },
+                { name: "Insights", id: "insights", num: "07", isPage: true, href: "/insights" },
                 { name: "Contact", id: "contact", num: "08" },
-              ].map((link) => (
-                <button
-                  key={link.id}
-                  onClick={(e) => handleNavClick(link.id, e as any)}
-                  className="w-fit px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-3 text-sm font-black uppercase tracking-[0.1em]"
-                >
-                  <span className="text-[10px] opacity-40 font-mono mb-0.5">{link.num}</span>
-                  {link.name}
-                </button>
-              ))}
+              ].map((link) => {
+                if (link.isPage) {
+                  return (
+                    <Link
+                      key={link.id}
+                      href={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="w-fit px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-3 text-sm font-black uppercase tracking-[0.1em]"
+                    >
+                      <span className="text-[10px] opacity-40 font-mono mb-0.5">{link.num}</span>
+                      {link.name}
+                    </Link>
+                  );
+                }
+                return (
+                  <button
+                    key={link.id}
+                    onClick={(e) => handleNavClick(link.id, e as any)}
+                    className="w-fit px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-3 text-sm font-black uppercase tracking-[0.1em]"
+                  >
+                    <span className="text-[10px] opacity-40 font-mono mb-0.5">{link.num}</span>
+                    {link.name}
+                  </button>
+                );
+              })}
             </div>
 
             <div className="mt-8 space-y-8 pb-8 border-t border-border pt-8">

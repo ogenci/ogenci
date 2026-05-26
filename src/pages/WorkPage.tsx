@@ -198,21 +198,11 @@ export default function WorkPage() {
           </div>
         </section>
 
-        {/* Testimonial */}
+        {/* Client Feedback — space reserved for real feedback */}
         <section className="px-6 py-32 bg-primary/5 border-y border-border">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-primary font-bold mb-12">Client Feedback</div>
-              <h2 className="text-3xl md:text-5xl font-display font-bold leading-[1.2] tracking-tight mb-12 text-foreground">
-                "{data.quote}"
-              </h2>
-              <div className="flex flex-col items-center gap-2">
-                <div className="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center font-display text-xl font-bold mb-2">
-                  {data.author.charAt(0)}
-                </div>
-                <div className="font-bold">{data.author}</div>
-                <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">{data.role}</div>
-              </div>
             </motion.div>
           </div>
         </section>
@@ -250,6 +240,7 @@ export default function WorkPage() {
 
         </div>
         </main>
+
         <Footer />
       </div>
     </div>

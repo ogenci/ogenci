@@ -11,8 +11,8 @@ export default function CustomCursor() {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  // High-inertia spring for a 'liquid' feel
-  const springConfig = { damping: 30, stiffness: 120, mass: 0.8 };
+  // Tighter spring for responsive movement
+  const springConfig = { damping: 18, stiffness: 250, mass: 0.4 };
   const ringX = useSpring(cursorX, springConfig);
   const ringY = useSpring(cursorY, springConfig);
 

@@ -170,7 +170,7 @@ export default function Home() {
   const [activePill, setActivePill] = useState(0);
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
+    <div className="relative min-h-screen bg-background text-foreground selection:bg-primary selection:text-background">
 
 
       <Header />
@@ -815,7 +815,7 @@ export default function Home() {
                   slug: "autonomous-ai-agents"
                 }
               ].map(({ tag, title, desc, date, readTime, num, accent, image, slug }) => (
-                <Link key={slug} href={`/insights?article=${slug}`}>
+                <Link key={slug} href={`/insights/${slug}`}>
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -832,7 +832,7 @@ export default function Home() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                       />
                       {/* Subtle gradient overlay at bottom for readability */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                     </div>
 
                     {/* Big number watermark */}

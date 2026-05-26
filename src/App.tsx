@@ -30,6 +30,9 @@ function CursorManager() {
 
 const Home = lazy(() => import("@/pages/Home"));
 const WorkPage = lazy(() => import("@/pages/WorkPage"));
+const WorkOverviewPage = lazy(() => import("@/pages/WorkOverviewPage"));
+const InsightsPage = lazy(() => import("@/pages/InsightsPage"));
+const ArticlePage = lazy(() => import("@/pages/ArticlePage"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const BookingPage = lazy(() => import("@/pages/BookingPage"));
 import CustomCursor from "@/components/CustomCursor";
@@ -62,7 +65,10 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/book" component={BookingPage} />
+        <Route path="/work" component={WorkOverviewPage} />
         <Route path="/work/:slug" component={WorkPage} />
+        <Route path="/insights/:slug" component={ArticlePage} />
+        <Route path="/insights" component={InsightsPage} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
