@@ -93,6 +93,7 @@ routes.push({
   meta: { title: "Work — OGENCI Portfolio · Case Studies", description: "Explore OGENCI's portfolio of high-converting websites, digital platforms, and AI systems built for global businesses." },
   schemas: [
     { id: "ld-breadcrumb", json: { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE }, { "@type": "ListItem", position: 2, name: "Work", item: `${SITE}/work` }] } },
+    { id: "ld-collection", json: { "@context": "https://schema.org", "@type": "CollectionPage", name: "OGENCI Portfolio — Case Studies", description: "Explore OGENCI's portfolio of high-converting websites, digital platforms, and AI systems.", url: `${SITE}/work`, mainEntity: { "@type": "ItemList", itemListElement: caseStudies.map((cs, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/work/${cs.slug}`, name: cs.client })) } } },
   ],
 });
 
@@ -113,6 +114,7 @@ routes.push({
   meta: { title: "Insights — OGENCI Growth Lab · Research", description: "Deep research on B2B conversion, attribution logic, and autonomous operational frameworks that pay predictable business dividends." },
   schemas: [
     { id: "ld-breadcrumb", json: { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE }, { "@type": "ListItem", position: 2, name: "Insights", item: `${SITE}/insights` }] } },
+    { id: "ld-collection", json: { "@context": "https://schema.org", "@type": "CollectionPage", name: "OGENCI Growth Lab — Insights & Research", description: "Deep research on B2B conversion, attribution logic, and autonomous operational frameworks.", url: `${SITE}/insights`, mainEntity: { "@type": "ItemList", itemListElement: articles.map((a, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/insights/${a.slug}`, name: a.title })) } } },
   ],
 });
 
@@ -159,5 +161,20 @@ for (const route of routes) {
     console.log(`✓ ${route.path} → ${route.path}/index.html`);
   }
 }
+
+// Generate sitemap with lastmod dates
+const today = new Date().toISOString().split("T")[0];
+const sitemapRoutes = routes.filter(r => r.path !== "/404.html" && r.path !== "/404");
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapRoutes.map(r => `  <url>
+    <loc>${SITE}${r.path}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${r.path === "/" ? "weekly" : "monthly"}</changefreq>
+    <priority>${r.path === "/" ? "1.0" : r.path.startsWith("/work") || r.path.startsWith("/insights") ? "0.8" : "0.7"}</priority>
+  </url>`).join("\n")}
+</urlset>`;
+writeFileSync(resolve(dist, "sitemap.xml"), sitemap);
+console.log(`\n✅ Generated sitemap.xml with ${sitemapRoutes.length} URLs (lastmod: ${today})`);
 
 console.log(`\n✅ Prerendered ${routes.length} routes to ${dist}`);
