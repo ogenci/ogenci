@@ -142,8 +142,8 @@ export default function WorkPage() {
           {/* Impact / Stats Grid */}
           <section className="px-6 py-20 md:py-32 bg-[#f4f1ea] border-b border-border">
             <div className="max-w-[1400px] mx-auto">
-              <div className="mb-20 text-center">
-                <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tight">Business Impact</h2>
+              <div className="mb-12 md:mb-20 text-center">
+                  <h2 className="text-3xl md:text-6xl font-display font-bold tracking-tight">Business Impact</h2>
                 <BodyText className="mt-4">Measurable growth engineered for scale.</BodyText>
               </div>
 
@@ -155,10 +155,10 @@ export default function WorkPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="bg-background p-16 flex flex-col items-center justify-center text-center group hover:bg-card transition-colors"
+                    className="bg-background p-8 md:p-16 flex flex-col items-center justify-center text-center group hover:bg-card transition-colors"
                   >
                     <TrendingUp className="w-6 h-6 text-primary mb-8 opacity-50 group-hover:opacity-100 transition-opacity" />
-                    <div className="text-6xl md:text-[84px] font-display font-bold tracking-tighter text-foreground mb-4 text-primary">
+                    <div className="text-5xl md:text-[84px] font-display font-bold tracking-tighter text-foreground mb-4 text-primary">
                       {stat.value}
                     </div>
                     <BodyText as="div">{stat.label}</BodyText>

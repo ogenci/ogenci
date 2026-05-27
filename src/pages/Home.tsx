@@ -537,8 +537,9 @@ export default function Home() {
         </section>
 
         {/* SEC 7: Work / Dark */}
-        <section id="work" className="dark bg-background text-foreground px-6 py-24">
-          <SectionRule num="VI." title="Featured Work · Web Design · Ads · AI · 2024 / 2025" page="006/008" />
+        <section id="work" className="dark bg-background text-foreground px-6 py-24 border-x-0">
+          <div className="max-w-[1400px] mx-auto">
+            <SectionRule num="VI." title="Featured Work · Web Design · Ads · AI · 2024 / 2025" page="006/008" />
 
             <div className="mt-20 grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="lg:col-span-1">
@@ -555,7 +556,7 @@ export default function Home() {
               </Link>
             </motion.div>
 
-            <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8">
               <ProjectCard
                 tag="Enterprise Redesign · 01 / 05"
                 meta="2026 · LOGISTICS · GHANA"
@@ -571,13 +572,13 @@ export default function Home() {
                 title="ISA Ghana"
                 desc="Premium digital transformation for the International School of Accra. Streamlined admissions funnel and immersive visual storytelling."
                 bg="hsl(var(--primary))"
-                text="#0a0a0a"
+                text="#ffffff"
                 slug="isa-ghana"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mt-8 mb-16">
             <ProjectCard
               tag="Supply Chain Solutions · 03 / 05"
               meta="2025 · LOGISTICS · GHANA"
@@ -605,13 +606,14 @@ export default function Home() {
               text="#ffffff"
               externalUrl="https://wesleyancm.org/"
             />
-          </div>
+            </div>
 
-          <SectionFooter
-            leftText="OGENCI · Portfolio Showcase · Accra, Ghana"
-            ctaText="View All Case Studies"
-            ctaHref="/work"
-          />
+            <SectionFooter
+              leftText="OGENCI · Portfolio Showcase · Accra, Ghana"
+              ctaText="View All Case Studies"
+              ctaHref="/work"
+            />
+          </div>
         </section>
 
         {/* SEC 7.5: Insights */}

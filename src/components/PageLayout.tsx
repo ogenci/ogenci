@@ -15,8 +15,8 @@ export default function PageLayout({ children, showGridLines = true, className =
       <div className="xl:px-10 w-full max-w-[1600px] mx-auto relative">
         {showGridLines && (
           <>
-            <div className="absolute inset-y-0 left-6 xl:left-10 w-px bg-border/20 pointer-events-none" />
-            <div className="absolute inset-y-0 right-6 xl:right-10 w-px bg-border/20 pointer-events-none" />
+            <div className="absolute inset-y-0 left-6 xl:left-10 w-px bg-border/20 pointer-events-none hidden xl:block" />
+            <div className="absolute inset-y-0 right-6 xl:right-10 w-px bg-border/20 pointer-events-none hidden xl:block" />
           </>
         )}
         {children}

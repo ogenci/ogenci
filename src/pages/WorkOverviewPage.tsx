@@ -104,14 +104,15 @@ export default function WorkOverviewPage() {
           description="We design and engineer bespoke web platforms, paid advertising strategies, and automated AI systems for organizations looking to lead their industries globally."
         />
 
-        <FilterBar
-          filters={filters}
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
-        />
+        <div className="max-w-[1600px] mx-auto">
+          <FilterBar
+            filters={filters}
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+          />
 
-        {/* Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 mb-48">
+          {/* Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 mb-48">
           {filteredProjects.map((p, index) => {
             const isEven = index % 2 === 0;
             const yOffset = isEven ? "md:translate-y-0" : "md:translate-y-12";
@@ -120,14 +121,14 @@ export default function WorkOverviewPage() {
               <div className="group cursor-pointer" data-cursor="project">
                 {/* Visual container */}
                 <div
-                  className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6 border border-border shadow-md transition-all duration-500 group-hover:shadow-2xl group-hover:scale-[1.01] flex flex-col items-center justify-center p-8 text-center"
+                  className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6 border border-border shadow-md transition-all duration-500 group-hover:shadow-2xl group-hover:scale-[1.01] flex flex-col items-center justify-center p-6 sm:p-8 text-center"
                   style={{ backgroundColor: p.bg, color: p.text }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center relative z-10">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:p-8 text-center relative z-10">
                     <span className="text-[10px] font-mono uppercase tracking-widest opacity-50 mb-4">{p.tag}</span>
-                    <h2 className="text-4xl sm:text-5xl font-display font-bold italic mb-6 leading-none">
+                    <h2 className="text-3xl sm:text-5xl font-display font-bold italic mb-6 leading-none">
                       {p.title}
                     </h2>
                     <p className="text-[10px] font-mono uppercase tracking-widest font-bold opacity-75 leading-relaxed">
@@ -136,7 +137,7 @@ export default function WorkOverviewPage() {
                   </div>
 
                   {/* Metric overlay */}
-                  <div className="absolute bottom-6 right-6 bg-background/10 backdrop-blur-md border border-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2 z-20">
+                  <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 bg-background/10 backdrop-blur-md border border-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2 z-20">
                     <TrendingUp className="w-4 h-4 text-primary" />
                     <div className="text-left">
                       <div className="text-lg font-display font-bold leading-none" style={{ color: p.text === "#ffffff" ? "#baa626" : "hsl(var(--primary))" }}>
@@ -160,7 +161,7 @@ export default function WorkOverviewPage() {
                   <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:text-primary transition-all duration-300" />
                 </h3>
 
-                <p className="text-[10px] font-mono uppercase tracking-widest font-bold text-muted-foreground leading-relaxed max-w-md">
+                <p className="text-[10px] font-mono uppercase tracking-widest font-bold text-muted-foreground leading-relaxed">
                   {p.desc}
                 </p>
               </div>
@@ -186,6 +187,7 @@ export default function WorkOverviewPage() {
               </Link>
             );
           })}
+          </div>
         </div>
 
         <DarkCtaSection
