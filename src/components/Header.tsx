@@ -195,8 +195,8 @@ export default function Header() {
                 <BodyText tracking="0.3em" as="div">Socials</BodyText>
                 <div className="flex gap-10 text-xs font-mono font-bold uppercase tracking-[0.2em]">
                   <a href="https://wa.me/233263460173" target="_blank" rel="noreferrer" className="hover:text-primary">WhatsApp</a>
-                  <a href="#" className="hover:text-primary">LinkedIn</a>
-                  <a href="#" className="hover:text-primary">Instagram</a>
+                  <a href="https://www.linkedin.com/company/ogencidigital" target="_blank" rel="noreferrer" className="hover:text-primary">LinkedIn</a>
+                  <a href="https://www.instagram.com/ogencidigital/" target="_blank" rel="noreferrer" className="hover:text-primary">Instagram</a>
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const SITE = "https://ogenci.com";
 const SITE_NAME = "OGENCI Digital";
-const DEFAULT_IMAGE = "/opengraph.webp";
+const DEFAULT_IMAGE = "https://ogenci.com/opengraph.webp";
 
 interface SEOProps {
   title: string;
@@ -43,6 +43,7 @@ export function PageSEO({ title, description, image, path, type = "website", noi
     meta("property", "og:url", canonical);
     meta("property", "og:image", image || DEFAULT_IMAGE);
     meta("property", "og:site_name", SITE_NAME);
+    meta("property", "og:locale", "en_GH");
 
     meta("name", "twitter:card", "summary_large_image");
     meta("name", "twitter:title", fullTitle);

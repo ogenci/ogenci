@@ -47,9 +47,10 @@ export default function Footer() {
             links: [
               { name: "hello@ogenci.com", href: "mailto:hello@ogenci.com" },
               { name: "WhatsApp", href: "https://wa.me/233263460173", target: "_blank" },
-              { name: "LinkedIn", href: "#", target: "_blank" },
-              { name: "Instagram", href: "#", target: "_blank" },
-              { name: "Twitter / X", href: "#", target: "_blank" }
+              { name: "LinkedIn", href: "https://www.linkedin.com/company/ogencidigital", target: "_blank" },
+              { name: "Instagram", href: "https://www.instagram.com/ogencidigital/", target: "_blank" },
+              { name: "Twitter / X", href: "https://x.com/ogencidigital", target: "_blank" },
+              { name: "TikTok", href: "https://www.tiktok.com/@ogencidigital", target: "_blank" }
             ],
           },
         ].map(({ title, links }) => (

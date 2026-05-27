@@ -27,7 +27,13 @@ export function OrganizationSchema() {
     description: "A premier global digital agency rooted in Africa. We build high-converting digital ecosystems, run ROI-driven ad campaigns, and deploy AI systems that scale businesses worldwide.",
     address: { "@type": "PostalAddress", addressLocality: "Accra", addressCountry: "GH" },
     contactPoint: { "@type": "ContactPoint", contactType: "sales", url: `${SITE}/book` },
-    sameAs: ["https://wa.me/233263460173"],
+    sameAs: [
+      "https://wa.me/233263460173",
+      "https://x.com/ogencidigital",
+      "https://www.instagram.com/ogencidigital/",
+      "https://www.linkedin.com/company/ogencidigital",
+      "https://www.tiktok.com/@ogencidigital",
+    ],
   });
 
   return null;
