@@ -133,7 +133,7 @@ export default function Header() {
             {/* Mobile Menu Header */}
             <div className="flex items-center justify-between mb-10">
               <div className="flex items-center gap-3">
-                <img src="/favicon.svg" alt="Logo" className="w-6 h-6" />
+                <img src="/favicon.svg" alt="OGENCI" className="w-6 h-6" />
                 <span className="text-lg font-display font-bold tracking-widest text-foreground uppercase">OGENCI</span>
               </div>
               <button onClick={() => setIsMenuOpen(false)} className="p-2 bg-muted/50 rounded-full">

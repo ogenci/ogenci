@@ -1,0 +1,132 @@
+# OGENCI — Global ROI Architecture
+
+> A premier global digital agency rooted in Africa. We build high-converting digital ecosystems, run ROI-driven ad campaigns, and deploy AI systems that scale businesses worldwide.
+
+## About OGENCI
+
+OGENCI is a global digital agency headquartered in Accra, Ghana. We specialize in building high-conversion digital ecosystems, running ROI-driven ad campaigns, and deploying AI systems that scale businesses. Our approach combines engineering precision with creative excellence, delivering measurable business outcomes for clients across logistics, education, non-profit, and service industries.
+
+**Location:** Accra, Ghana (GMT+0)
+
+## Services
+
+### Web Design
+Editorial-style, conversion-optimized websites built for enterprise and high-growth organizations. Includes seamless admissions funnels, booking flows, and content management.
+
+### Paid Advertising
+ROI-driven ad campaigns with precise attribution modeling. Data-backed audience targeting and creative optimization.
+
+### AI & Automation
+Custom AI systems for business operations including autonomous agents, intelligent search, and automated workflows.
+
+### Retainers
+Ongoing maintenance, security updates, performance optimization, and content management.
+
+## Pricing
+
+### Foundation — $2,500/mo
+- 5-page responsive website
+- SEO & performance optimized
+- Secure hosting & SSL
+- 1 revision cycle
+- ~2 week delivery for first 5 pages
+
+### Growth — $3,500/mo
+- Up to 10 pages
+- SEO & performance optimized
+- Priority support & 24h response
+- 2 revision cycles
+- Premium typography & animations
+- ~2 week delivery
+
+### Scale — $5,000/mo
+- Unlimited pages
+- Custom animations & micro-interactions
+- Dedicated project manager
+- Integration-ready (CRM, payments, analytics)
+- Unlimited revisions
+- ~3 week delivery
+
+### Enterprise — Custom
+- AI-powered automations
+- Multi-language support
+- Custom API integrations
+- Dedicated design & engineering team
+- Global CDN & 99.9% uptime SLA
+- Ongoing UX research & A/B testing
+
+## Process
+
+1. **Discovery & Strategy** — Market analysis, conversion gap mapping, competitor research
+2. **Design & Engineering** — Wireframing, UI/UX design, front-end + back-end development
+3. **Optimization & SEO** — Performance tuning, search engine optimization, accessibility audit
+4. **Launch & Maintenance** — Deployment, monitoring, ongoing optimization
+
+## Case Studies
+
+### Jonmoore International
+**Industry:** Heavy Logistics | **Location:** Tema, Ghana | **Year:** 2026 (Concept)
+
+Jonmoore executes 600-ton cargo operations with 25+ years of ISO-certified authority. We architected a premium, editorial-style digital experience that translates their physical engineering precision into a digital interface, with a streamlined 'Request a Quote' flow emphasizing their pristine safety record (1.2M+ man-hours without incident).
+
+**Projected Impact:** +185% lead lift, -42% bounce rate, 10x brand trust
+
+---
+
+### ISA Ghana (International School of Accra)
+**Industry:** Education | **Location:** Accra, Ghana | **Year:** 2025
+
+Full-scale enterprise redesign for a leading school providing Cambridge & IB curricula. Transformed the platform into an immersive, editorial-style experience with a seamless admissions funnel.
+
+**Impact:** +125% admissions lift, 3.2x prospect engagement, -60% mobile bounce rate
+
+---
+
+### BJH Logistics
+**Industry:** Logistics | **Location:** Ghana | **Year:** 2025
+
+Full-scale digital platform for a premium logistics firm. Integrated tracking, custom portal, and optimized booking flows.
+
+---
+
+### Accra Grammar
+**Industry:** Education | **Location:** Ghana | **Year:** 2025
+
+Complete digital identity and enrollment platform for one of Ghana's leading schools. Modern, accessible, and high-converting.
+
+---
+
+### Rich Jane School
+**Industry:** Education | **Location:** Ghana | **Year:** 2024
+
+An immersive, community-focused website for a premier preschool and primary institution.
+
+---
+
+### Wesleyan CM
+**Industry:** Non-Profit / Faith | **Location:** Global | **Year:** 2025
+
+Engineered a high-fidelity digital ecosystem centered on 'Digital Fellowship' including a custom low-latency streaming engine, AI-powered sermon search index, and streamlined global giving portal.
+
+**Impact:** +310% stream reach, +85% donation lift, 4.5x global engagement
+
+## Insights
+
+### African Tech Leap: Why Ghana's tech ecosystem is the next frontier for global ROI
+Ghana's tech landscape is experiencing unprecedented growth. Analysis of market opportunities, infrastructure development, and investment trends positioning Ghana as a tech hub.
+
+### Attribution Metrics 2026: Redefining digital attribution for the AI era
+Modern attribution modeling approaches that move beyond last-click to understand true conversion drivers across complex customer journeys.
+
+### Autonomous AI Agents: How autonomous AI agents are reshaping digital operations
+Deep dive into how AI agents are transforming business operations, from customer service to complex workflow automation.
+
+### Navigating the New Landscape of Technology Regulations
+Analysis of emerging tech regulations affecting digital operations including data privacy, AI governance, and cross-border compliance.
+
+## Contact
+
+- **Strategy Session:** https://ogenci.com/book
+- **WhatsApp:** https://wa.me/233263460173
+- **Location:** Accra, Ghana (GMT+0)
+- **Response Time:** Within 2 hours on business days

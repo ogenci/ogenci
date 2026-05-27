@@ -13,6 +13,8 @@ import SectionRule from "@/components/SectionRule";
 import SectionHeader from "@/components/SectionHeader";
 import SectionFooter from "@/components/SectionFooter";
 import BodyText from "@/components/BodyText";
+import { PageSEO } from "@/lib/seo";
+import { OrganizationSchema, WebSiteSchema, BreadcrumbSchema } from "@/components/JsonLd";
 import FormField from "@/components/FormField";
 import AuthorAvatar from "@/components/AuthorAvatar";
 import { PrimaryButton, SecondaryButton } from "@/components/PrimaryButton";
@@ -161,6 +163,14 @@ export default function Home() {
 
   return (
     <PageLayout>
+      <PageSEO
+        title="OGENCI — Global ROI Architecture · Rooted in Africa, Built for the World"
+        description="A premier global digital agency rooted in Africa. High-converting websites, ROI-driven ad campaigns, and AI systems that scale businesses worldwide."
+        path="/"
+      />
+      <OrganizationSchema />
+      <WebSiteSchema />
+      <BreadcrumbSchema items={[{ name: "Home", path: "/" }]} />
       <main>
         {/* SEC 1: Hero */}
         <section id="top" className="py-24 px-6 flex flex-col items-center text-center overflow-hidden relative">

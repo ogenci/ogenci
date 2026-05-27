@@ -4,10 +4,21 @@ import PageLayout from "@/components/PageLayout";
 import PageHero from "@/components/PageHero";
 import DotGrid from "@/components/DotGrid";
 import { scaleIn } from "@/lib/animations";
+import { PageSEO } from "@/lib/seo";
+import { BreadcrumbSchema } from "@/components/JsonLd";
 
 export default function BookingPage() {
   return (
     <PageLayout>
+      <PageSEO
+        title="Book a Strategy Session — OGENCI"
+        description="Schedule a high-impact strategy audit with OGENCI. We'll diagnose your digital infrastructure and map the exact blueprint required to scale your business globally."
+        path="/book"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Home", path: "/" },
+        { name: "Book", path: "/book" },
+      ]} />
       <main className="pt-32 pb-24 px-6">
         <div className="max-w-[1400px] mx-auto">
           <div className="mb-16 flex flex-col items-center text-center max-w-4xl mx-auto">

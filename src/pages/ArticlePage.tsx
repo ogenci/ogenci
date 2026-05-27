@@ -12,6 +12,8 @@ import { Image } from "@/components/Image";
 import { useParallax } from "@/hooks/useParallax";
 import { fadeUp } from "@/lib/animations";
 import articles, { sortedArticleKeys } from "@/data/articles";
+import { PageSEO } from "@/lib/seo";
+import { ArticleSchema, BreadcrumbSchema } from "@/components/JsonLd";
 
 export default function ArticlePage() {
   const [, params] = useRoute("/insights/:slug");
@@ -21,6 +23,7 @@ export default function ArticlePage() {
   if (!article) {
     return (
       <PageLayout>
+        <PageSEO title="Article Not Found · OGENCI" description="The article you're looking for doesn't exist." path={`/insights/${slug}`} noindex />
         <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 px-6 pt-32">
           <h1 className="text-4xl font-display font-bold">Article not found</h1>
           <Link href="/insights" className="text-[10px] font-mono uppercase tracking-widest text-primary hover:underline">
@@ -40,6 +43,24 @@ export default function ArticlePage() {
 
   return (
     <PageLayout>
+      <PageSEO
+        title={article.title}
+        description={article.desc}
+        image={article.image}
+        path={`/insights/${slug}`}
+      />
+      <ArticleSchema
+        headline={article.title}
+        description={article.desc}
+        image={article.image}
+        datePublished={article.date}
+        author="OGENCI Digital"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Home", path: "/" },
+        { name: "Insights", path: "/insights" },
+        { name: article.title, path: `/insights/${slug}` },
+      ]} />
       {/* Hero */}
       <section className="relative h-[45vh] md:h-[55vh] overflow-hidden">
         <motion.div style={{ y }} className="absolute inset-0">

@@ -10,6 +10,8 @@ import ArticleCard from "@/components/ArticleCard";
 import BodyText from "@/components/BodyText";
 import { Image } from "@/components/Image";
 import articles, { sortedArticleKeys, articleKeys } from "@/data/articles";
+import { PageSEO } from "@/lib/seo";
+import { BreadcrumbSchema } from "@/components/JsonLd";
 
 export default function InsightsPage() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -29,6 +31,15 @@ export default function InsightsPage() {
 
   return (
     <PageLayout>
+      <PageSEO
+        title="Insights — OGENCI Growth Lab · Research"
+        description="Deep research on B2B conversion, attribution logic, and autonomous operational frameworks that pay predictable business dividends."
+        path="/insights"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Home", path: "/" },
+        { name: "Insights", path: "/insights" },
+      ]} />
       <main className="px-6 py-12 md:py-24 relative z-10">
         <PageHero
           badge="OGENCI Growth Lab · Insights & Research"

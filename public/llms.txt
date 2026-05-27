@@ -1,0 +1,38 @@
+# OGENCI — Global ROI Architecture
+
+> A premier global digital agency rooted in Africa. We build high-converting digital ecosystems, run ROI-driven ad campaigns, and deploy AI systems that scale businesses worldwide.
+
+## Core Pages
+
+- [Home](https://ogenci.com/): Agency overview, services, pricing, portfolio preview
+- [Work / Case Studies](https://ogenci.com/work): Portfolio of web design, AI, and advertising projects
+- [Insights](https://ogenci.com/insights): Research on B2B conversion, attribution, and AI operations
+- [Book a Session](https://ogenci.com/book): Schedule a strategy audit
+
+## Case Studies
+
+- [Jonmoore International](https://ogenci.com/work/jonmoore): Enterprise redesign for West Africa's leading heavy logistics provider
+- [ISA Ghana](https://ogenci.com/work/isa-ghana): Digital transformation for the International School of Accra
+- [BJH Logistics](https://ogenci.com/work/bjh-logistics): Full-scale digital platform for a premium logistics firm
+- [Accra Grammar](https://ogenci.com/work/accra-grammar): Digital identity and enrollment platform for a leading school
+- [Rich Jane School](https://ogenci.com/work/rich-jane-school): K-12 digital platform for a premier preschool
+- [Wesleyan CM](https://ogenci.com/work/wesleyan): Digital ecosystem for a multi-national ministry
+
+## Insights
+
+- [African Tech Leap](https://ogenci.com/insights/african-tech-leap): Why Ghana's tech ecosystem is the next frontier for global ROI
+- [Attribution Metrics 2026](https://ogenci.com/insights/attribution-metrics-2026): Redefining digital attribution for the AI era
+- [Autonomous AI Agents](https://ogenci.com/insights/autonomous-ai-agents): How autonomous AI agents are reshaping digital operations
+- [Tech Regulations](https://ogenci.com/insights/the-tech-regulations): Navigating the new landscape of technology regulations
+
+## Services
+
+- Web Design: High-conversion, editorial-style websites
+- Paid Advertising: ROI-driven ad campaigns
+- AI & Automation: Custom AI systems for business operations
+- Retainers: Ongoing maintenance, security, and optimization
+
+## Contact
+
+- Strategy Session: https://ogenci.com/book
+- WhatsApp: https://wa.me/233263460173

@@ -1,10 +1,12 @@
 import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
+import { PageSEO } from "@/lib/seo";
 
 export default function NotFound() {
   return (
     <PageLayout showGridLines={false}>
+      <PageSEO title="Page Not Found — OGENCI" description="The page you're looking for doesn't exist." noindex />
       <main className="flex-grow flex items-center justify-center px-6 py-32 min-h-screen">
         <div className="max-w-md w-full text-center space-y-8">
           <h1 className="text-[80px] sm:text-[120px] font-display font-black leading-none tracking-tighter text-primary">404</h1>

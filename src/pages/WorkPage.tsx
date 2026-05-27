@@ -8,6 +8,8 @@ import DotGrid from "@/components/DotGrid";
 import BodyText from "@/components/BodyText";
 import { useParallax } from "@/hooks/useParallax";
 import { fadeUp, scaleIn } from "@/lib/animations";
+import { PageSEO } from "@/lib/seo";
+import { BreadcrumbSchema } from "@/components/JsonLd";
 
 const caseStudies = {
   "jonmoore": {
@@ -76,6 +78,16 @@ export default function WorkPage() {
 
   return (
     <PageLayout showGridLines={false}>
+      <PageSEO
+        title={`${data.client} — Case Study · OGENCI`}
+        description={data.solution.slice(0, 160)}
+        path={`/work/${slug}`}
+      />
+      <BreadcrumbSchema items={[
+        { name: "Home", path: "/" },
+        { name: "Work", path: "/work" },
+        { name: data.client, path: `/work/${slug}` },
+      ]} />
       <main>
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a] text-white pt-24 pb-12 px-6">

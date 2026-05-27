@@ -6,6 +6,8 @@ import PageLayout from "@/components/PageLayout";
 import PageHero from "@/components/PageHero";
 import FilterBar from "@/components/FilterBar";
 import DarkCtaSection from "@/components/DarkCtaSection";
+import { PageSEO } from "@/lib/seo";
+import { BreadcrumbSchema } from "@/components/JsonLd";
 
 const allProjects = [
   {
@@ -97,6 +99,15 @@ export default function WorkOverviewPage() {
 
   return (
     <PageLayout>
+      <PageSEO
+        title="Work — OGENCI Portfolio · Case Studies"
+        description="Explore OGENCI's portfolio of high-converting websites, digital platforms, and AI systems built for global businesses."
+        path="/work"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Home", path: "/" },
+        { name: "Work", path: "/work" },
+      ]} />
       <main className="px-6 py-12 md:py-24 relative z-10">
         <PageHero
           badge="OGENCI Portfolio · Selected Work"
