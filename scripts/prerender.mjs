@@ -28,13 +28,13 @@ function ldJson(key, json) {
   return `<script id="${key}" type="application/ld+json">${JSON.stringify(json)}</script>`;
 }
 
-function injectMeta(template, { title, description, image = DEFAULT_IMAGE, path = "/", type = "website", noindex = false }) {
+function injectMeta(html, { title, description, image = DEFAULT_IMAGE, path = "/", type = "website", noindex = false }) {
   const url = `${SITE}${path}`;
   const fullTitle = title.includes("OGENCI") ? title : `${title} · OGENCI`;
   const robots = noindex ? "noindex, nofollow" : "index, follow";
   const imageAbs = image.startsWith("http") ? image : `${SITE}${image}`;
 
-  return template
+  let result = html
     .replace(/<title>[^<]*<\/title>/, `<title>${fullTitle}</title>`)
     .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${description}" />`)
     .replace(/<meta name="robots"[^>]*>/, `<meta name="robots" content="${robots}" />`)
@@ -47,7 +47,16 @@ function injectMeta(template, { title, description, image = DEFAULT_IMAGE, path 
     .replace(/<meta name="twitter:title"[^>]*>/, `<meta name="twitter:title" content="${fullTitle}" />`)
     .replace(/<meta name="twitter:description"[^>]*>/, `<meta name="twitter:description" content="${description}" />`)
     .replace(/<meta name="twitter:image"[^>]*>/, `<meta name="twitter:image" content="${imageAbs}" />`)
-    .replace("</head>", `${ldJson("ld-canonical", { "@context": "https://schema.org", "@type": type === "article" ? "Article" : "WebPage", name: fullTitle, description, url, image: imageAbs })}</head>`);
+
+  // Add canonical <link> tag (in addition to JSON-LD)
+  if (!result.includes('rel="canonical"')) {
+    result = result.replace("</head>", `<link rel="canonical" href="${url}" /></head>`);
+  }
+
+  // Add JSON-LD canonical (WebPage/Article schema)
+  result = result.replace("</head>", `${ldJson("ld-canonical", { "@context": "https://schema.org", "@type": type === "article" ? "Article" : "WebPage", name: fullTitle, description, url, image: imageAbs })}</head>`);
+
+  return result;
 }
 
 function injectJsonLd(html, schemas) {
@@ -55,14 +64,19 @@ function injectJsonLd(html, schemas) {
   return html.replace("</head>", `${ldBlock}</head>`);
 }
 
+function injectBody(html, text) {
+  return html.replace('<div id="root"></div>', `<div id="root"><div class="prerendered-content" style="padding:2rem;font-family:Inter,sans-serif;max-width:1200px;margin:0 auto;color:#0a0a0a"><h1 style="font-size:2rem;font-weight:700">${text.title}</h1>${text.body ? `<p style="font-size:1rem;line-height:1.6;margin-top:1rem">${text.body}</p>` : ""}</div></div>`);
+}
+
 const routes = [];
 
 // Home
 routes.push({
   path: "/",
+  body: { title: "OGENCI — Global ROI Architecture · Rooted in Africa, Built for the World", body: "A premier global digital agency rooted in Africa. We build high-converting websites, run ROI-driven ad campaigns, and deploy AI systems that scale businesses worldwide. Digital agency serving logistics, education, non-profit, and service industries." },
   meta: {
     title: "OGENCI — Global ROI Architecture · Rooted in Africa, Built for the World",
-    description: "A premier global digital agency rooted in Africa. We build high-converting digital ecosystems, run ROI-driven ad campaigns, and deploy AI systems that scale businesses worldwide.",
+    description: "A premier global digital agency rooted in Africa. High-converting websites, ROI-driven ad campaigns, and AI systems that scale businesses worldwide.",
   },
   schemas: [
     { id: "ld-organization", json: { "@context": "https://schema.org", "@type": "Organization", name: "OGENCI", url: SITE, logo: `${SITE}/favicon.svg`, description: "A premier global digital agency rooted in Africa.", address: { "@type": "PostalAddress", addressLocality: "Accra", addressCountry: "GH" }, contactPoint: { "@type": "ContactPoint", contactType: "sales", url: `${SITE}/book` }, sameAs: ["https://wa.me/233263460173", "https://x.com/ogencidigital", "https://www.instagram.com/ogencidigital/", "https://www.linkedin.com/company/ogencidigital", "https://www.tiktok.com/@ogencidigital"] } },
@@ -81,6 +95,7 @@ routes.push({
 // Booking
 routes.push({
   path: "/book",
+  body: { title: "Book a Strategy Session with OGENCI", body: "Schedule a free strategy audit with OGENCI. We analyze your current digital presence, identify conversion gaps, and build a tailored growth plan that drives measurable ROI." },
   meta: { title: "Book a Strategy Session · OGENCI", description: "Schedule a free strategy audit with OGENCI. Let's analyze your current digital presence and build a growth plan that drives measurable ROI." },
   schemas: [
     { id: "ld-breadcrumb", json: { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE }, { "@type": "ListItem", position: 2, name: "Book a Session", item: `${SITE}/book` }] } },
@@ -90,6 +105,7 @@ routes.push({
 // Work overview
 routes.push({
   path: "/work",
+  body: { title: "OGENCI Portfolio — Case Studies", body: "Explore OGENCI's portfolio of high-converting websites, digital platforms, and AI systems built for global businesses. Featuring Jonmoore International, ISA Ghana, BJH Logistics, Accra Grammar, Rich Jane School, and Wesleyan CM." },
   meta: { title: "Work — OGENCI Portfolio · Case Studies", description: "Explore OGENCI's portfolio of high-converting websites, digital platforms, and AI systems built for global businesses." },
   schemas: [
     { id: "ld-breadcrumb", json: { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE }, { "@type": "ListItem", position: 2, name: "Work", item: `${SITE}/work` }] } },
@@ -101,6 +117,7 @@ routes.push({
 for (const cs of caseStudies) {
   routes.push({
     path: `/work/${cs.slug}`,
+    body: { title: `${cs.client} — Case Study`, body: `${cs.solution} Industry: ${cs.industry}. OGENCI delivers high-converting digital ecosystems for global businesses.` },
     meta: { title: `${cs.client} — Case Study · OGENCI`, description: cs.solution.slice(0, 160) },
     schemas: [
       { id: "ld-breadcrumb", json: { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE }, { "@type": "ListItem", position: 2, name: "Work", item: `${SITE}/work` }, { "@type": "ListItem", position: 3, name: cs.client, item: `${SITE}/work/${cs.slug}` }] } },
@@ -111,6 +128,7 @@ for (const cs of caseStudies) {
 // Insights overview
 routes.push({
   path: "/insights",
+  body: { title: "OGENCI Growth Lab — Insights & Research", body: "Deep research on B2B conversion, attribution logic, autonomous AI agents, and tech regulations. Insights from OGENCI's team on building high-conversion interfaces and operational frameworks that drive predictable business growth." },
   meta: { title: "Insights — OGENCI Growth Lab · Research", description: "Deep research on B2B conversion, attribution logic, and autonomous operational frameworks that pay predictable business dividends." },
   schemas: [
     { id: "ld-breadcrumb", json: { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE }, { "@type": "ListItem", position: 2, name: "Insights", item: `${SITE}/insights` }] } },
@@ -123,6 +141,7 @@ for (const article of articles) {
   const imageAbs = article.image.startsWith("http") ? article.image : `${SITE}${article.image}`;
   routes.push({
     path: `/insights/${article.slug}`,
+    body: { title: article.title, body: article.desc },
     meta: { title: article.title, description: article.desc, image: imageAbs, type: "article" },
     schemas: [
       { id: "ld-breadcrumb", json: { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE }, { "@type": "ListItem", position: 2, name: "Insights", item: `${SITE}/insights` }, { "@type": "ListItem", position: 3, name: article.title, item: `${SITE}/insights/${article.slug}` }] } },
@@ -134,30 +153,35 @@ for (const article of articles) {
 // 404
 routes.push({
   path: "/404",
+  body: { title: "Page Not Found", body: "The page you're looking for doesn't exist. Please check the URL or return to the homepage." },
   meta: { title: "Page Not Found · OGENCI", description: "The page you're looking for doesn't exist.", noindex: true },
   schemas: [],
 });
 routes.push({
   path: "/404.html",
+  body: { title: "Page Not Found", body: "The page you're looking for doesn't exist. Please check the URL or return to the homepage." },
   meta: { title: "Page Not Found · OGENCI", description: "The page you're looking for doesn't exist.", noindex: true },
   schemas: [],
 });
 
 // Generate all route files
 for (const route of routes) {
-  const html = injectMeta(template, { ...route.meta, path: route.path });
-  const finalHtml = injectJsonLd(html, route.schemas);
+  let html = injectMeta(template, { ...route.meta, path: route.path });
+  html = injectJsonLd(html, route.schemas);
+  if (route.body) {
+    html = injectBody(html, route.body);
+  }
 
   if (route.path === "/") {
-    writeFileSync(resolve(dist, "index.html"), finalHtml);
+    writeFileSync(resolve(dist, "index.html"), html);
     console.log(`✓ / → /index.html`);
   } else if (route.path === "/404.html") {
-    writeFileSync(resolve(dist, "404.html"), finalHtml);
+    writeFileSync(resolve(dist, "404.html"), html);
     console.log(`✓ /404.html → /404.html`);
   } else {
     const outPath = resolve(dist, route.path.slice(1), "index.html");
     mkdirSync(dirname(outPath), { recursive: true });
-    writeFileSync(outPath, finalHtml);
+    writeFileSync(outPath, html);
     console.log(`✓ ${route.path} → ${route.path}/index.html`);
   }
 }
