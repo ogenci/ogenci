@@ -20,6 +20,7 @@ export default function InsightsPage() {
   const featured = articles[featuredSlug];
 
   const filteredArticleKeys = sortedArticleKeys.filter((key) => {
+    if (key === featuredSlug) return false;
     if (activeFilter === "All") return true;
     return articles[key].tag === activeFilter;
   });
