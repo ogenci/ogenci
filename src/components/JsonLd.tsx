@@ -76,6 +76,20 @@ export function ArticleSchema({ headline, description, image, datePublished, aut
   return null;
 }
 
+export function FAQSchema({ questions }: { questions: { question: string; answer: string }[] }) {
+  useLdJson("ld-faq", {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: questions.map(q => ({
+      "@type": "Question",
+      name: q.question,
+      acceptedAnswer: { "@type": "Answer", text: q.answer },
+    })),
+  });
+
+  return null;
+}
+
 export function BreadcrumbSchema({ items }: { items: { name: string; path: string }[] }) {
   useLdJson("ld-breadcrumb", {
     "@context": "https://schema.org",

@@ -14,7 +14,7 @@ import SectionHeader from "@/components/SectionHeader";
 import SectionFooter from "@/components/SectionFooter";
 import BodyText from "@/components/BodyText";
 import { PageSEO } from "@/lib/seo";
-import { OrganizationSchema, WebSiteSchema, BreadcrumbSchema } from "@/components/JsonLd";
+import { OrganizationSchema, WebSiteSchema, BreadcrumbSchema, FAQSchema } from "@/components/JsonLd";
 import FormField from "@/components/FormField";
 import AuthorAvatar from "@/components/AuthorAvatar";
 import { PrimaryButton, SecondaryButton } from "@/components/PrimaryButton";
@@ -171,6 +171,15 @@ export default function Home() {
       <OrganizationSchema />
       <WebSiteSchema />
       <BreadcrumbSchema items={[{ name: "Home", path: "/" }]} />
+      <FAQSchema questions={[
+        { question: "What services does OGENCI offer?", answer: "OGENCI provides three core services: high-conversion web design, ROI-driven paid advertising (Meta, Google, TikTok), and custom AI & automation systems including chatbots, workflow automation, and CRM integration." },
+        { question: "Where is OGENCI based?", answer: "OGENCI is headquartered in Accra, Ghana with a global outlook, serving clients across logistics, education, non-profit, and service industries worldwide." },
+        { question: "How much does OGENCI's web design service cost?", answer: "Web Design starts at $2,500/month for the Foundation plan (5-page site, SEO optimized, ~2 week delivery), $3,500/month for Growth (10 pages, priority support), and $5,000/month for Scale (unlimited pages, dedicated PM). Custom Enterprise pricing is also available." },
+        { question: "How much does OGENCI's paid advertising service cost?", answer: "Paid Ads start at $2,500/month for Foundation (1 platform, $3K ad spend), $3,500/month for Growth (2 platforms, $5K ad spend), and $5,000/month for Scale (3+ platforms, $10K ad spend). Enterprise plans are custom-priced." },
+        { question: "How much does OGENCI's AI & automation service cost?", answer: "AI Integrations start at $2,500/month for Foundation (1 AI chatbot), $3,500/month for Growth (2 agents + CRM integration), and $5,000/month for Scale (unlimited agents + custom workflows). Enterprise plans include dedicated infrastructure." },
+        { question: "What makes OGENCI different from other digital agencies?", answer: "OGENCI focuses on measurable ROI over vanity metrics. We treat every client as a growth partner, not a billable hour — optimizing every site, ad, and automation for international user behaviors and revenue outcomes." },
+        { question: "How do I get started with OGENCI?", answer: "Book a free strategy session at ogenci.com/book. We'll analyze your current digital presence, identify conversion gaps, and propose a tailored growth plan." },
+      ]} />
       <main>
         {/* SEC 1: Hero */}
         <section id="top" className="py-24 px-6 flex flex-col items-center text-center overflow-hidden relative">
