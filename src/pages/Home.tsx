@@ -583,7 +583,7 @@ export default function Home() {
                 desc="Premium conceptual redesign for West Africa's leading heavy logistics provider. Optimized for high-ticket B2B quote conversions."
                 bg="#f3f4f6"
                 text="#0a0a0a"
-                slug="jonmoore"
+                externalUrl="https://jonmoore-international-ltd.vercel.app/"
               />
               <ProjectCard
                 tag="Enterprise Redesign · 02 / 05"
@@ -592,7 +592,7 @@ export default function Home() {
                 desc="Premium digital transformation for the International School of Accra. Streamlined admissions funnel and immersive visual storytelling."
                 bg="hsl(var(--primary))"
                 text="#ffffff"
-                slug="isa-ghana"
+                externalUrl="http://isaghana.com/"
               />
             </div>
           </div>

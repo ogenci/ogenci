@@ -102,6 +102,16 @@ routes.push({
   ],
 });
 
+// Education
+routes.push({
+  path: "/education",
+  body: { title: "Education Sector Redesigns & Transformations — OGENCI", body: "We craft premium digital experiences for educational institutions. Elevate your school's online prestige, build trust, and optimize admissions journeys." },
+  meta: { title: "Education Sector Redesigns & Transformations · OGENCI", description: "We craft premium digital experiences for educational institutions. Elevate your school's online prestige, build trust, and optimize admissions journeys." },
+  schemas: [
+    { id: "ld-breadcrumb", json: { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE }, { "@type": "ListItem", position: 2, name: "Education", item: `${SITE}/education` }] } },
+  ],
+});
+
 // Work overview
 routes.push({
   path: "/work",

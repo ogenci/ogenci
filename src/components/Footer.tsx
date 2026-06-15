@@ -37,6 +37,7 @@ export default function Footer() {
             links: [
               { name: "About OGENCI", href: "/#why" },
               { name: "Our Work", href: "/#work" },
+              { name: "Education Sector", href: "/education" },
               { name: "Case Studies", href: "/#work" },
               { name: "Process", href: "/#process" },
               { name: "Blog", href: "/#work" }

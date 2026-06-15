@@ -35,6 +35,7 @@ const InsightsPage = lazy(() => import("@/pages/InsightsPage"));
 const ArticlePage = lazy(() => import("@/pages/ArticlePage"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const BookingPage = lazy(() => import("@/pages/BookingPage"));
+const EducationPage = lazy(() => import("@/pages/EducationPage"));
 import CustomCursor from "@/components/CustomCursor";
 import SideRails from "@/components/SideRails";
 
@@ -65,6 +66,7 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/book" component={BookingPage} />
+        <Route path="/education" component={EducationPage} />
         <Route path="/work" component={WorkOverviewPage} />
         <Route path="/work/:slug" component={WorkPage} />
         <Route path="/insights/:slug" component={ArticlePage} />

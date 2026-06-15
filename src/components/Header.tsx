@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "wouter";
-import { ArrowUpRight, Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { ArrowUpRight, Menu, X, ChevronDown } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import BodyText from "@/components/BodyText";
 
 export default function Header() {
@@ -9,12 +9,25 @@ export default function Header() {
   const [location] = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
+  const [workDropdownOpen, setWorkDropdownOpen] = useState(false);
+  const workRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (workRef.current && !workRef.current.contains(e.target as Node)) {
+        setWorkDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const navWidth = useTransform(scrollY, [0, 100], [isMobile ? "100%" : "100%", isMobile ? "100%" : "80%"]);
@@ -86,9 +99,47 @@ export default function Header() {
                 <Link href="/#process" onClick={(e) => handleNavClick("process", e)} className="px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-1">
                   Process <span className="text-[8px] opacity-50 mb-1">05</span>
                 </Link>
-                <Link href="/work" className="px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-1">
-                  Work <span className="text-[8px] opacity-50 mb-1">06</span>
-                </Link>
+
+                {/* Work Dropdown */}
+                <div ref={workRef} className="relative">
+                  <button
+                    onClick={() => setWorkDropdownOpen(!workDropdownOpen)}
+                    onMouseEnter={() => setWorkDropdownOpen(true)}
+                    className="px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-1"
+                  >
+                    Work <span className="text-[8px] opacity-50 mb-1">06</span>
+                    <ChevronDown className={`w-2.5 h-2.5 transition-transform duration-200 ${workDropdownOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  <AnimatePresence>
+                    {workDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -4, scaleY: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scaleY: 1 }}
+                        exit={{ opacity: 0, y: -4, scaleY: 0.95 }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                        onMouseEnter={() => setWorkDropdownOpen(true)}
+                        onMouseLeave={() => setWorkDropdownOpen(false)}
+                        className="absolute top-full left-0 mt-2 w-64 bg-background/95 backdrop-blur-xl border border-border rounded-2xl shadow-xl overflow-hidden origin-top"
+                      >
+                        <Link
+                          href="/work"
+                          onClick={() => setWorkDropdownOpen(false)}
+                          className="block px-5 py-3.5 hover:bg-muted/50 hover:text-primary transition-all text-[10px] font-mono uppercase tracking-[0.2em] font-bold border-b border-border/50"
+                        >
+                          <span className="text-primary">/</span> View All / Portfolio
+                        </Link>
+                        <Link
+                          href="/education"
+                          onClick={() => setWorkDropdownOpen(false)}
+                          className="block px-5 py-3.5 hover:bg-muted/50 hover:text-primary transition-all text-[10px] font-mono uppercase tracking-[0.2em] font-bold"
+                        >
+                          <span className="text-primary">/</span> Education
+                        </Link>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
                 <Link href="/insights" className="px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-1">
                   Insights <span className="text-[8px] opacity-50 mb-1">07</span>
                 </Link>
@@ -147,7 +198,7 @@ export default function Header() {
                 { name: "Services", id: "services", num: "03" },
                 { name: "Pricing", id: "pricing", num: "04" },
                 { name: "Process", id: "process", num: "05" },
-                { name: "Work", id: "work", num: "06", isPage: true, href: "/work" },
+                { name: "Work", id: "work", num: "06", isExpandable: true },
                 { name: "Insights", id: "insights", num: "07", isPage: true, href: "/insights" },
                 { name: "Contact", id: "contact", num: "08" },
               ].map((link) => {
@@ -162,6 +213,46 @@ export default function Header() {
                       <span className="text-[10px] opacity-40 font-mono mb-0.5">{link.num}</span>
                       {link.name}
                     </Link>
+                  );
+                }
+                if (link.isExpandable) {
+                  return (
+                    <div key={link.id} className="flex flex-col">
+                      <button
+                        onClick={() => setMobileWorkOpen(!mobileWorkOpen)}
+                        className="w-fit px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-3 text-sm font-black uppercase tracking-[0.1em]"
+                      >
+                        <span className="text-[10px] opacity-40 font-mono mb-0.5">{link.num}</span>
+                        {link.name}
+                        <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${mobileWorkOpen ? "rotate-180" : ""}`} />
+                      </button>
+                      <AnimatePresence>
+                        {mobileWorkOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden flex flex-col pl-8"
+                          >
+                            <Link
+                              href="/work"
+                              onClick={() => setIsMenuOpen(false)}
+                              className="w-fit px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-3 text-xs font-bold uppercase tracking-[0.1em] text-muted-foreground/80"
+                            >
+                              / View All / Portfolio
+                            </Link>
+                            <Link
+                              href="/education"
+                              onClick={() => setIsMenuOpen(false)}
+                              className="w-fit px-4 py-2 rounded-full hover:bg-muted/50 hover:text-primary transition-all flex items-center gap-3 text-xs font-bold uppercase tracking-[0.1em] text-muted-foreground/80"
+                            >
+                              / Education
+                            </Link>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   );
                 }
                 return (

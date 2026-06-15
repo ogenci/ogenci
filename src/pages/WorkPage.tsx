@@ -19,6 +19,7 @@ const caseStudies = {
     location: "Tema, Ghana",
     service: "Enterprise Redesign",
     year: "2026 (Concept)",
+    externalUrl: "https://jonmoore-international-ltd.vercel.app/",
     challenge: "Jonmoore executes 600-ton cargo operations that nobody else will touch, but their legacy website (jonmoore.com.gh) failed to reflect their 25+ years of ISO-certified authority. The outdated UI/UX obscured their prestigious BigMove Excellence Awards and created friction for high-value enterprise clients trying to request complex quotes.",
     solution: "We architected a premium, editorial-style digital experience that translates their physical engineering precision into a digital interface. By introducing a streamlined, conversion-optimized 'Request a Quote' flow and emphasizing their pristine safety record (1.2M+ man-hours without incident), the platform is designed to instantly convert high-ticket B2B leads.",
     stats: [
@@ -37,6 +38,7 @@ const caseStudies = {
     location: "Accra, Ghana",
     service: "Enterprise Redesign",
     year: "2025",
+    externalUrl: "http://isaghana.com/",
     challenge: "The International School of Accra provides world-class blended curricula (Cambridge & IB), but their previous digital presence did not reflect the prestige of their institution. The admissions flow was disjointed, and the platform struggled to clearly communicate their unique value proposition to high-net-worth parents and expatriates.",
     solution: "We executed a full-scale enterprise redesign, transforming the platform into an immersive, editorial-style experience. By implementing a seamless, conversion-optimized admissions funnel and high-fidelity visual storytelling, we positioned ISA as the undisputed leader in progressive education in Ghana.",
     stats: [
@@ -55,6 +57,7 @@ const caseStudies = {
     location: "Global HQ: Indiana, USA",
     service: "Digital Transformation & AI",
     year: "2025",
+    externalUrl: "https://wesleyancm.org/",
     challenge: "WCIM is a global ministry with branches from the US to Ghana, yet their digital presence was fragmented. They needed a unified platform that could handle high-bandwidth livestreams, a complex global sermon archive, and a secure, multi-currency donation system that worked seamlessly across international borders.",
     solution: "We engineered a high-fidelity digital ecosystem centered on 'Digital Fellowship'. This included a custom-built low-latency streaming engine, an AI-powered sermon search index, and a streamlined global giving portal. The platform now serves as the digital heartbeat for thousands of members worldwide, unifying their global mission under one high-performance interface.",
     stats: [
@@ -103,6 +106,19 @@ export default function WorkPage() {
               <h1 className="text-5xl md:text-[8vw] font-display font-bold leading-[0.95] tracking-tighter mb-8 max-w-4xl">
                 {data.tagline}
               </h1>
+              {data.externalUrl && (
+                <motion.a
+                  href={data.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all"
+                >
+                  View Live Site <ArrowUpRight className="w-4 h-4" />
+                </motion.a>
+              )}
             </motion.div>
           </div>
 
