@@ -5,7 +5,7 @@ import "dotenv/config";
 
 const router: IRouter = Router();
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy_key_for_boot");
 
 const contactSchema = z.object({
   name: z.string().min(2),
